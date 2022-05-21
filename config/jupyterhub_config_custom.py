@@ -121,27 +121,6 @@ profiles = {
             "node_selector": {"nodepool": "gpupool"},
         },
     },
-    "lancuni-grp-prj-2021": {
-        "display_name": "LANDER - Lancaster University Group Project 2021",
-        "slug": "91_lander_lancuni-grp-prj-2021-notebook:0.1.0",
-        "description": """
-        Provides a bespoke Python environment with deep-learning libraries as well as R and Julia. 
-        See requirements.txt for installed python libraries in shared folder.
-        As this project uses small datasets, compute requirements are not expected to be high.
-        Please let me know if you are hitting these limits (typically results in a dead kernel). 
-        The resources allocated here are almost entirely for the Jupyter Kernel with very little consumption by other processes 
-        unlike the situation where a VM maybe running a complete operating system with a graphical desktop environment.
-        No GPU support (yet). 
-        """,
-        "kubespawner_override": {
-            "image": "crjupyterhub.azurecr.io/vvcb/lancuni-grp-prj-2021-notebook:0.1.0",
-            "mem_limit": "4G",
-            "mem_guarantee": "3G",
-            "cpu_limit": 2,
-            "cpu_guarantee": 0.5,
-            "node_selector": {"nodepool": "aipool"},
-        },
-    },
 }
 
 # ==============================================================================
@@ -171,17 +150,6 @@ storage_volumes = {
             "readOnly": False,
         },
     },
-    "lancuni-grp-prj-2021": {
-        "volume": {
-            "name": "pvc-aksshare-lancuni-grp-prj-2021",
-            "persistentVolumeClaim": {"claimName": "pvc-aksshare-lancuni-grp-prj-2021"},
-        },
-        "volume_mount": {
-            "name": "pvc-aksshare-lancuni-grp-prj-2021",
-            "mountPath": "/home/jovyan/shared_lancuni_grp_prj_2021",
-            "readOnly": False,
-        },
-    },
 }
 
 # ==============================================================================
@@ -199,7 +167,7 @@ profile_groups = {
     "global": {
         # this applies to only the admin users
         "profiles": profiles.keys(),
-        "users": ["vvcbx", "dobsons-max"],
+        "users": ["chandrabalan vishnu (lthtr)"],
     },
     "gpu": {
         "profiles": ["gpu"],
@@ -210,28 +178,7 @@ profile_groups = {
         "users": ["vvcbx", "dobsons-max"],
     },
     "fft": {"profiles": ["fft"], "users": ["quindavies", "rohsha"]},
-    "lancuni-grp-prj-2021": {
-        "profiles": ["lancuni-grp-prj-2021"],
-        "users": [
-            "edwardau39",
-            "geonzaji",
-            "greyhypotheses",
-            "halaawa",
-            "hitu3426",
-            "ignatiusezeani",
-            "joshlin-ronisha",
-            "mahic98",
-            "messiah-rayy",
-            "neethumuraleedharan",
-            "prakashjp27",
-            "totipotency",
-            "xiongm2",
-            "vvcb",
-            "jobraveknight",
-            "dobsons-max",
-        ],
-    },
-}
+    }
 
 # ==============================================================================
 # STORAGE GROUPS
@@ -244,27 +191,6 @@ default_storage = [
 storage_groups = {
     "global": {"volumes": storage_volumes.keys(), "users": ["vvcbx", "dobsons-max"]},
     "fft": {"volumes": ["fft"], "users": ["quindavies", "rohsha"]},
-    "lancuni-grp-prj-2021": {
-        "volumes": ["lancuni-grp-prj-2021"],
-        "users": [
-            "edwardau39",
-            "geonzaji",
-            "greyhypotheses",
-            "halaawa",
-            "hitu3426",
-            "ignatiusezeani",
-            "joshlin-ronisha",
-            "mahic98",
-            "messiah-rayy",
-            "neethumuraleedharan",
-            "prakashjp27",
-            "totipotency",
-            "xiongm2",
-            "vvcb",
-            "jobraveknight",
-            "dobsons-max",
-        ],
-    },
 }
 
 # ==============================================================================
