@@ -1,0 +1,41 @@
+hub:
+  config:
+    AzureAdOAuthenticator:
+      client_id: 35517ff9-9844-45ec-b32d-46cff0fae54e
+      client_secret: yLF8Q~Ku5uc.t0sa1f77BX4CKAjwUXFEQcxhydcc
+      oauth_callback_url: https://ai.xlthtr.nhs.uk/landerhub/hub/oauth_callback
+      tenant_id: 90a86382-fc9f-459c-b91a-9852fb08b2cd
+      scope:
+        - openid
+        - name
+        - profile
+        - email
+    JupyterHub:
+      authenticator_class: azuread
+      admin_access: true
+      admin_users:
+        - chandrabalan vishnu (lthtr)
+      template_paths:
+        - '/usr/local/etc/jupyterhub/custom_templates'
+      template_vars:
+        announcement: | 
+          Preview only. 
+          Subject to rapid, breaking changes. 
+          Contact Vishnu.Chandrabalan@lthtr.nhs.uk with feedback/comments.
+  extraFiles:
+  # https://zero-to-jupyterhub.readthedocs.io/en/latest/resources/reference.html#hub-extrafiles
+    customConfig:
+      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
+    customPage:
+      mountPath: /usr/local/etc/jupyterhub/custom_templates/page.html
+    customLogo:
+      mountPath: /usr/local/share/jupyterhub/static/lander-logo.png
+# https://discourse.jupyter.org/t/trouble-configuring-ingress-for-helm-chart/5050/3
+  baseUrl: /landerhub
+  extraEnv:
+  # keep injected https_proxy - this fixes github oauth redirect
+    http_proxy: ""
+    # https_proxy: ""
+    HTTP_PROXY: ""
+    # HTTPS_PROXY: ""
+

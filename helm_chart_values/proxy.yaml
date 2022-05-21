@@ -1,0 +1,16 @@
+# https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/1014
+proxy:
+# Offload SSL at loadbalancer/nginx
+  https:
+    enabled: true
+    type: offload
+    # hosts:
+    #   - ai.xlthtr.nhs.uk
+    # type: secret
+    # secret:
+    #   name: secret-tls-xlthtr
+  service:
+    type: ClusterIP
+    # loadBalancerIP: 172.18.16.190
+    # annotations: 
+    #   service.beta.kubernetes.io/azure-load-balancer-internal: "true"

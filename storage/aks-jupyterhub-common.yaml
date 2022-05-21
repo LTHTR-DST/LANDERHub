@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-aksshare-jupyterhub
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile
+  azureFile:
+    secretName: stjupyterhub-secret
+    secretNamespace: jupyterhub-prd
+    shareName: aksshare-jupyterhub
+    readOnly: true
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-aksshare-jupyterhub
+spec:
+  accessModes:
+    - ReadOnlyMany
+  volumeMode: Filesystem
+  volumeName: pvc-aksshare-jupyterhub
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 5Gi
+  

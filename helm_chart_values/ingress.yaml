@@ -1,0 +1,11 @@
+# https://discourse.jupyter.org/t/trouble-configuring-ingress-for-helm-chart/5050/3
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/client_max_body_size: "0"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32m
+  hosts:
+    - ai.xlthtr.nhs.uk
+ 

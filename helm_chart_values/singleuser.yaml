@@ -1,0 +1,28 @@
+singleuser:
+  image:
+    name: crlander.azurecr.io/vvcb/datascience-notebook
+    tag: 0.1.0
+    pullPolicy: Always
+  defaultUrl: "/lab"
+  memory:
+    limit: 4G
+    guarantee: 1G
+  cpu:
+    limit: 1
+    guarantee: 0.25
+  storage:
+    capacity: 8Gi
+    # extraVolumes:
+    #   - name: jupyterhub-shared
+    #     persistentVolumeClaim:
+    #       claimName: pvc-aksshare-jupyterhub
+    # extraVolumeMounts:
+    #   - name: jupyterhub-shared
+    #     mountPath: /home/jovyan/shared
+    #     readOnly: true
+  extraEnv:
+  # keep injected https_proxy - this fixes github oauth redirect
+    http_proxy: ""
+    # https_proxy: ""
+    HTTP_PROXY: ""
+    # HTTPS_PROXY: ""
