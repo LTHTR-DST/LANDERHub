@@ -1,13 +1,21 @@
-# Version               Date	        App. version
-# 1.1.3-n474.h8d0a7616	09 May 2022	2.3.0
+# Version               Date        App. version
+# 1.1.3-n522.h1cc6ee89	20 May 2022	    2.3.0
+# 1.1.3-n474.h8d0a7616	09 May 2022	    2.3.0
 # 1.1.3-n097.hb6688f54	06 October 2021	2.0.0b1
-# 1.1.3	                25 August 2021	1.4.2
+# 1.1.3	                25 August 2021  1.4.2
 # 1.2.0 Stable
 # https://jupyterhub.github.io/helm-chart/
 
+# When redeploying to same cluster with different namespace, old cluster roles cause installation to fail
+# https://forum.linuxfoundation.org/discussion/858217/lab-10-1-how-to-delete-a-clusterrole-and-a-clusterrolebinding
+# kubectl get clusterroles
+# kubectl get clusterrolebindings
+# find your role name and then delete
+# kubectl delete clusterrolebinding landerhub-prd 
+# kubectl delete clusterrole landerhub-prd 
 
 # need a mechanism to change this between prd and dev
-NS=jupyterhub-prd 
+NS=landerhub-prd 
 HELM_RELEASE_NAME=jhpvt01
 Z2JH_VERSION=1.2.0
 
