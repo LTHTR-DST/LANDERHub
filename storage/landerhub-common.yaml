@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pvc-aksshare-jupyterhub
+  name: pvc-landerhub-common
+  namespace: landerhub-prd
 spec:
   capacity:
     storage: 5Gi
@@ -10,20 +11,21 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: azurefile
   azureFile:
-    secretName: stjupyterhub-secret
-    secretNamespace: jupyterhub-prd
-    shareName: aksshare-jupyterhub
+    secretName: stlthlandercore-secret
+    secretNamespace: default
+    shareName: landerhub-common
     readOnly: true
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-aksshare-jupyterhub
+  name: pvc-landerhub-common
+  namespace: landerhub-prd
 spec:
   accessModes:
     - ReadOnlyMany
   volumeMode: Filesystem
-  volumeName: pvc-aksshare-jupyterhub
+  volumeName: pvc-landerhub-common
   storageClassName: azurefile
   resources:
     requests:
