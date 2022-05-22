@@ -6,271 +6,101 @@
 from kubernetes import client
 from kubespawner.utils import get_k8s_model
 from kubernetes.client.models import V1Volume, V1VolumeMount
+from datetime import datetime
+import z2jh
 
 
-TPL_RESOURCES = """
-Guarantees: {cpu_guarantee} vCPU and {memory_guarantee} RAM
-Limits: {cpu_limit} vCPU and {memory_limit} RAM.
-"""
-
-# ==============================================================================
-# PROFILE LIST
-# ==============================================================================
-
-profiles = {
-    "basic": {
-        "display_name": "LANDER - Basic",
-        "slug": "00_lander_basic",
-        "description": """
-        Basic environment for testing with Python, R and Julia. 
-        """,
-        "default": True,
-        "kubespawner_override": {
-            "mem_limit": "1G",
-            "mem_guarantee": "512M",
-            "cpu_limit": 0.5,
-            "cpu_guarantee": 0.2,
-        },
-    },
-    "advanced": {
-        "display_name": "LANDER - Advanced",
-        "slug": "20_lander_advanced",
-        "description": """
-        Environment for larger analytical workloads.
-        """,
-        "kubespawner_override": {
-            "mem_limit": "6G",
-            "mem_guarantee": "3G",
-            "cpu_limit": 4,
-            "cpu_guarantee": 1,
-        },
-    },
-    "octave": {
-        "display_name": "LANDER - Octave",
-        "slug": "30_lander_octave",
-        "description": """
-        Provides GNU Octave kernel in addition to Python, R and Julia.
-        """,
-        "kubespawner_override": {
-            "image": "crjupyterhub.azurecr.io/vvcb/octave-notebook:0.1.0",
-            "mem_limit": "4G",
-            "mem_guarantee": "2G",
-            "cpu_limit": 2,
-            "cpu_guarantee": 1,
-        },
-    },
-    "fft": {
-        "display_name": "LANDER - FFT Project",
-        "slug": "40_lander_fft",
-        "description": """
-        Environment for FFT Sentiment Analysis.
-        """,
-        "kubespawner_override": {
-            "image": "crjupyterhub.azurecr.io/vvcb/fft-notebook:0.1.0",
-            "mem_limit": "2G",
-            "mem_guarantee": "1G",
-            "cpu_limit": 2,
-            "cpu_guarantee": 1,
-            "environment": {
-                "fft_secret":"EUUSlbL5rp9Vn2UUak7y7sys1R-Q0Y1LGj6x6dXGPXc="
-            }
-
-        },
-    },
-    "rstudio": {
-        "display_name": "LANDER - RStudio",
-        "slug": "50_lander_rstudio",
-        "description": """
-        RStudio and a minimal Python 3.9 environment.
-        Please see https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-r-notebook
-        and https://github.com/jupyterhub/jupyter-rsession-proxy
-        for installed libraries and limitations. 
-        RStudio's libary management feature may not work if there are additional dependecies. 
-        Use conda or mamba in a terminal to install libraries. eg. `mamba install --channel r r-tidyverse`. 
-        """,
-        "kubespawner_override": {
-            "image": "crjupyterhub.azurecr.io/vvcb/rstudio-notebook:0.1.0",
-            "mem_limit": "4G",
-            "mem_guarantee": "2G",
-            "cpu_limit": 2,
-            "cpu_guarantee": 1,
-            "default_url": "/rstudio/auth-sign-in?appUri=%2F",
-        },
-    },
-    "gpu": {
-        "display_name": "LANDER - GPU Enabled",
-        "slug": "90_lander_gpu",
-        "description": """
-        GPU enabled cluster for accelerated ML/AI workloads.
-        """,
-        "kubespawner_override": {
-            # "image": "crjupyterhub.azurecr.io/vvcb/tensorflow-notebook:0.1.0",
-            "image": "cschranz/gpu-jupyter",
-            "mem_limit": "24G",
-            "mem_guarantee": "10G",
-            "cpu_limit": 4,
-            "cpu_guarantee": 2,
-            "tolerations": [
-                {
-                    "key": "sku",
-                    "operator": "Equal",
-                    "value": "gpu",
-                    "effect": "NoSchedule",
-                },
-            ],
-            "node_selector": {"nodepool": "gpupool"},
-        },
-    },
-}
-
-# ==============================================================================
-# STORAGE VOLUMES AND MOUNTS
-# ==============================================================================
-
-storage_volumes = {
-    "public": {
-        "volume": {
-            "name": "jupyterhub-shared",
-            "persistentVolumeClaim": {"claimName": "pvc-aksshare-jupyterhub"},
-        },
-        "volume_mount": {
-            "name": "jupyterhub-shared",
-            "mountPath": "/home/jovyan/shared",
-            "readOnly": True,
-        },
-    },
-    "fft": {
-        "volume": {
-            "name": "fft-shared",
-            "persistentVolumeClaim": {"claimName": "pvc-aksshare-fft"},
-        },
-        "volume_mount": {
-            "name": "fft-shared",
-            "mountPath": "/home/jovyan/shared_fft",
-            "readOnly": False,
-        },
-    },
-}
-
-# ==============================================================================
-# PROFILE GROUPS
-# ==============================================================================
-
-# this applies to all users
-default_profiles = [
-    "basic",
-    # "medium",
-    "rstudio",
-]
-
-profile_groups = {
-    "global": {
-        # this applies to only the admin users
-        "profiles": profiles.keys(),
-        "users": ["chandrabalan vishnu (lthtr)"],
-    },
-    "gpu": {
-        "profiles": ["gpu"],
-        "users": ["greyhypotheses"]
-    },
-    "advanced": {
-        "profiles": ["advanced", "octave"],
-        "users": ["vvcbx", "dobsons-max"],
-    },
-    "fft": {"profiles": ["fft"], "users": ["quindavies", "rohsha"]},
-    }
-
-# ==============================================================================
-# STORAGE GROUPS
-# ==============================================================================
-
-default_storage = [
-    "public",
-]
-
-storage_groups = {
-    "global": {"volumes": storage_volumes.keys(), "users": ["vvcbx", "dobsons-max"]},
-    "fft": {"volumes": ["fft"], "users": ["quindavies", "rohsha"]},
-}
-
-# ==============================================================================
-
-# Update profile descriptions here
-
-for k, p in profiles.items():
-    try:
-        resources = TPL_RESOURCES.format(
-            cpu_guarantee=p["kubespawner_override"]["cpu"]["guarantee"],
-            cpu_limit=p["kubespawner_override"]["cpu"]["limit"],
-            memory_guarantee=p["kubespawner_override"]["memory"]["guarantee"],
-            memory_limit=p["kubespawner_override"]["memory"]["limit"],
-        )
-    except:
-        # This should log an error regarding missing resource constraints
-        resources = ""
-    finally:
-        p["description"] += resources
-        continue
-
-
-def get_profile_list(spawner):
+def get_workspaces(spawner):
     user = spawner.user.name
 
-    # Todo: Is this the correct way? Should storage be linked to profiles instead?
-    # Storage is linked to user rather than profile.
+    user_workspaces = set(z2jh.get_config(f"custom.users.{user}.workspaces", []))
 
-    profile_names = set(default_profiles)
+    permitted_workspaces = []
 
-    for g in profile_groups.values():
-        if user in g["users"]:
-            profile_names.update(g["profiles"])
+    for user_ws in user_workspaces:
 
-    profile_list = []
-    for i in profile_names:
-        p = profiles.get(i)
+        ws = z2jh.get_config(f"custom.workspaces.{user_ws}", None)
+        if ws is None:
+            print(f"Workspace {user_ws} not found for user {user}")
+            continue
 
-        if p:
-            # p["kubespawner_override"]["storage"] = {
-            #     "capacity": "8Gi",
-            #     "extraVolumes": volumes,
-            #     "extraVolumeMounts": volume_mounts,
-            # }
+        ws_end_date = ws.get("end_date", "1900-01-01")
+        ws_end_date = datetime.strptime(ws_end_date, "%Y-%m-%d")
 
-            profile_list.append(p)
+        ws["slug"] = user_ws
 
-    profile_list = sorted(profile_list, key=lambda x: x.get("slug", "99_Z"))
+        if datetime.today() > ws_end_date:
+            # expired environment
+            continue
+        
+        # Update kubespawner_override with storage options
+        ws['kubespawner_override'].update(ws.pop('storage',{}))
 
-    return profile_list
+        permitted_workspaces.append(ws)
+
+    permitted_workspaces = sorted(
+        permitted_workspaces, key=lambda x: x.get("slug", "99_Z")
+    )
+
+    return permitted_workspaces
 
 
 def modify_pod_hook(spawner, pod):
 
-    user = spawner.user.name
-    volume_keys = set(default_storage)
+    common_storage = {
+        "volume": {
+            "name": "landerhub-common",
+            "persistentVolumeClaim": {"claimName": "pvc-landerhub-common"},
+        },
+        "volume_mount": {
+            "name": "landerhub-common",
+            "mountPath": "/home/jovyan/shared_readonly",
+            "readOnly": True,
+        },
+    }
 
-    for s in storage_groups.values():
-        if user in s["users"]:
-            volume_keys.update(s["volumes"])
+    try:
+        # get both volume and volume_mount before adding to exsiting lists.
+        # Error here will skip assigning just the volume and not the mount
+        volume = common_storage["volume"]
+        volume_mount = common_storage["volume_mount"]
 
-    for k in volume_keys:
-        try:
-            # get both volume and volume_mount before adding to exsiting lists.
-            # Error here will skip assigning just the volume and not the mount
-            volume = storage_volumes[k]["volume"]
-            volume_mount = storage_volumes[k]["volume_mount"]
-
-            pod.spec.volumes.append(get_k8s_model(V1Volume, volume))
-            pod.spec.containers[0].volume_mounts.append(
-                get_k8s_model(V1VolumeMount, volume_mount)
-            )
-        except Exception as e:
-            spawner.log.error(
-                f"Error mounting shared folders for {k}. Error msg: {str(e)}"
-            )
-            continue
-
+        pod.spec.volumes.append(get_k8s_model(V1Volume, volume))
+        pod.spec.containers[0].volume_mounts.append(
+            get_k8s_model(V1VolumeMount, volume_mount)
+        )
+    except Exception as e:
+        spawner.log.error(f"Error mounting shared folders for {k}. Error msg: {str(e)}")
     return pod
 
 
 c.KubeSpawner.modify_pod_hook = modify_pod_hook
-c.KubeSpawner.profile_list = get_profile_list
+c.KubeSpawner.profile_list = get_workspaces
+c.KubeSpawner.profile_form_template = """
+        <style>
+        /* The profile description should not be bold, even though it is inside the <label> tag */
+        #kubespawner-profiles-list label p {
+            font-weight: normal;
+        }
+        </style>
+        <div class='form-group' id='kubespawner-profiles-list'>
+        {% for profile in profile_list %}
+        <label for='profile-item-{{ profile.slug }}' class='form-control input-group'>
+            <div class='col-md-1'>
+                <input type='radio' name='profile' id='profile-item-{{ profile.slug }}' value='{{ profile.slug }}' {% if profile.default %}checked{% endif %} />
+            </div>
+            <div class='col-md-11'>
+                <strong>{{ profile.display_name }}</strong>
+                {% if profile.description %}
+                    <p>{{ profile.description }}
+                {% endif %}
+                {% if profile.kubespawner_override.image %}
+                    <br><em>Image: {{ profile.kubespawner_override.image.split('/')[-1] }}</em>
+                {% endif %}
+                <br><em>Expires: {{ profile.end_date }}</em>
+                </p>
+            </div>
+        </label>
+        {% endfor %}
+        </div>
+        """

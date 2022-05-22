@@ -1,0 +1,143 @@
+custom:
+  # =============================================================================
+  # Define environment objects for reuse in workspaces
+  # =============================================================================
+  environments:
+    rstudio_default: &rstudio_default
+      image: crlander.azurecr.io/vvcb/rstudio-notebook:0.1.0
+      memory:
+        guarantee: 512M
+        limit: 2G
+      cpu:
+        guarantee: 0.3
+        limit: 1
+      default_url: /rstudio/auth-sign-in?appUri=%2F
+
+    jupyter_default: &jupyter_default
+      image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
+      memory:
+        guarantee: 512M
+        limit: 2G
+      cpu:
+        guarantee: 0.2
+        limit: 1
+    jupyter_advanced: &jupyter_advanced
+      image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
+      memory:
+        guarantee: 2G
+        limit: 6G
+      cpu:
+        guarantee: 0.5
+        limit: 1.5
+
+  # =============================================================================
+  # Workspace Definitions
+  # =============================================================================
+  workspaces:
+    00_ws_default:
+      display_name: Default Generic Workspace
+      slug: 00_ws_default
+      description: Basic environment for testing with Python R and Julia.
+      default: True
+      start_date: 2022-01-01
+      end_date: 2030-01-01
+      kubespawner_override: *jupyter_default
+
+    10_ws_advanced:
+      display_name: Advanced Generic Workspace
+      slug: 10_ws_advanced
+      description: Advanced environment for testing with Python R and Julia.
+      start_date: 2022-01-01
+      end_date: 2030-01-01
+      kubespawner_override: *jupyter_advanced
+
+    neuro_headline_rstudio:
+      display_name: Neurology Headline Data Project
+      slug: neuro_headline_rstudio
+      description: Lancaster University student placement project
+      start_date: 2022-05-01
+      end_date: 2022-09-30
+      kubespawner_override: *rstudio_default
+      storage:
+        volumes:
+          - name: landerhub-neuro-headlinecategory
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-neuro-headlinecategory
+        volume_mounts:
+          - name: landerhub-neuro-headlinecategory
+            mountPath: /home/jovyan/landerhub-neuro-headlinecategory
+            readOnly: False
+
+    neuro_direct2scan_rstudio:
+      display_name: Neurology Direct to Scan Project
+      slug: neuro_direct2scan_rstudio
+      description: Lancaster University student placement project
+      start_date: 2022-05-01
+      end_date: 2022-09-30
+      kubespawner_override: *rstudio_default
+      storage:
+        volumes:
+          - name: landerhub-neuro-direct2scan
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-neuro-direct2scan
+        volume_mounts:
+          - name: landerhub-neuro-direct2scan
+            mountPath: /home/jovyan/landerhub-neuro-direct2scan
+            readOnly: False
+
+    frailty_rstudio:
+      display_name: Acute Frailty Unit Project
+      slug: frailty_rstudio
+      description: Lancaster University student placement project
+      start_date: 2022-05-01
+      end_date: 2022-09-30
+      kubespawner_override: *rstudio_default
+      storage:
+        volumes:
+          - name: landerhub-fraility
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-fraility
+        volume_mounts:
+          - name: landerhub-fraility
+            mountPath: /home/jovyan/landerhub-fraility
+            readOnly: False
+
+    colorectal_2ww_jupyter:
+      display_name: Colorectal 2WW Analytics
+      slug: colorectal_2ww_jupyter
+      description: Colorectal 2WW pathway analysis
+      start_date: 2022-05-01
+      end_date: 2022-12-31
+      kubespawner_override: *jupyter_advanced
+      storage:
+        volumes:
+          - name: landerhub-colorectal2ww
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-colorectal2ww
+        volume_mounts:
+          - name: landerhub-colorectal2ww
+            mountPath: /home/jovyan/landerhub-colorectal2ww
+            readOnly: False
+
+    fft_jupyter:
+      display_name: FFT Sentiment Analysis
+      slug: fft_jupyter
+      description: FFT Sentiment Analysis NLP collaboration with Imperial College London
+      start_date: 2022-05-01
+      end_date: 2022-12-31
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/fft-notebook:0.1.0
+        memory:
+          guarantee: 512M
+          limit: 2G
+        cpu:
+          guarantee: 0.3
+          limit: 1
+        volumes:
+          - name: fft-shared
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-fft
+        volume_mounts:
+          - name: fft-shared
+            mountPath: /home/jovyan/shared_fft
+            readOnly: False
