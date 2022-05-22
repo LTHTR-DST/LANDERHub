@@ -4,6 +4,7 @@ singleuser:
     tag: 0.1.0
     pullPolicy: Always
   defaultUrl: "/lab"
+  startTimeout: 600
   memory:
     limit: 4G
     guarantee: 1G
@@ -21,7 +22,7 @@ singleuser:
     #     mountPath: /home/jovyan/shared
     #     readOnly: true
   extraEnv:
-  # keep injected https_proxy - this fixes github oauth redirect
+    # keep injected https_proxy - this fixes github oauth redirect
     http_proxy: ""
     # https_proxy: ""
     HTTP_PROXY: ""
