@@ -27,7 +27,10 @@ hub:
     customConfig:
       mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
     customPage:
+    customPageTemplate:
       mountPath: /usr/local/etc/jupyterhub/custom_templates/page.html
+    customSpawnPageTemplate:
+      mountPath: /usr/local/etc/jupyterhub/custom_templates/spawn.html
     customLogo:
       mountPath: /usr/local/share/jupyterhub/static/lander-logo.png
 # https://discourse.jupyter.org/t/trouble-configuring-ingress-for-helm-chart/5050/3
