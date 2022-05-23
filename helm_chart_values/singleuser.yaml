@@ -14,18 +14,11 @@ singleuser:
   storage:
     # https://azure.microsoft.com/en-gb/pricing/details/storage/files/
     capacity: 10Gi
+    homeMountPath: /home/jovyan/personal
     dynamic:
       storageClass: landerhub-azurefile
       storageAccessModes:
         - ReadWriteMany
-    # extraVolumes:
-    #   - name: jupyterhub-shared
-    #     persistentVolumeClaim:
-    #       claimName: pvc-aksshare-jupyterhub
-    # extraVolumeMounts:
-    #   - name: jupyterhub-shared
-    #     mountPath: /home/jovyan/shared
-    #     readOnly: true
   extraEnv:
     # keep injected https_proxy - this fixes github oauth redirect
     http_proxy: ""
