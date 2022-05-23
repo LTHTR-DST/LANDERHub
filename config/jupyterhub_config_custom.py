@@ -3,14 +3,18 @@
 # https://discourse.jupyter.org/t/tailoring-spawn-options-and-server-configuration-to-certain-users/8449
 # https://discourse.jupyter.org/t/shared-folder-for-users-with-r-o-access-for-some-and-r-w-access-for-some-in-jupyterhub/4220/8
 
-from kubernetes import client
-from kubespawner.utils import get_k8s_model
-from kubernetes.client.models import V1Volume, V1VolumeMount
 from datetime import datetime
+
+from kubernetes import client
+from kubernetes.client.models import (V1ObjectMeta, V1Pod, V1Volume,
+                                      V1VolumeMount)
+from kubespawner.spawner import KubeSpawner
+from kubespawner.utils import get_k8s_model
+
 import z2jh
 
 
-def get_workspaces(spawner):
+def get_workspaces(spawner: KubeSpawner):
     user = spawner.user.name
 
     user_workspaces = set(z2jh.get_config(f"custom.users.{user}.workspaces", []))
@@ -31,10 +35,12 @@ def get_workspaces(spawner):
 
         if datetime.today() > ws_end_date:
             # expired environment
+            spawner.log.info(
+                f'Workspace {user_ws} expired on {ws_end_date.strftime( "%Y-%m-%d")}. Consider removing it from config.'
+            )
             continue
-        
-        # Update kubespawner_override with storage options
-        ws['kubespawner_override'].update(ws.pop('storage',{}))
+
+        ws["kubespawner_override"]["extra_labels"] = {"workspace": user_ws}
 
         permitted_workspaces.append(ws)
 
@@ -45,7 +51,7 @@ def get_workspaces(spawner):
     return permitted_workspaces
 
 
-def modify_pod_hook(spawner, pod):
+def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
 
     common_storage = {
         "volume": {
@@ -69,8 +75,42 @@ def modify_pod_hook(spawner, pod):
         pod.spec.containers[0].volume_mounts.append(
             get_k8s_model(V1VolumeMount, volume_mount)
         )
+
+        spawner.log.info(f"Successfully mounted {v['name']} to {vm['mountPath']}.")
+
     except Exception as e:
-        spawner.log.error(f"Error mounting shared folders for {k}. Error msg: {str(e)}")
+        spawner.log.error(f"Error mounting common shared folders. Error msg: {str(e)}")
+
+    # Add additional storage based on workspace label on pod
+    # This ensures that the correct storage is mounted into the correct workspace
+    try:
+
+        metadata: V1ObjectMeta = pod.metadata
+
+        workspace = metadata.labels.get("workspace", "")
+
+        storage = z2jh.get_config(f"custom.workspaces.{workspace}.storage")
+
+        spawner.log.info(f"Attempting to mount {str(storage)}...")
+
+        if storage:
+            volumes = storage["volumes"]
+            volume_mounts = storage["volume_mounts"]
+            for v, vm in zip(volumes, volume_mounts):
+                pod.spec.volumes.append(get_k8s_model(V1Volume, v))
+                pod.spec.containers[0].volume_mounts.append(
+                    get_k8s_model(V1VolumeMount, vm)
+                )
+
+            spawner.log.info(f"Successfully mounted {v['name']} to {vm['mountPath']}.")
+        else:
+            spawner.log.info(
+                f"No additional volumes to mount for '{workspace}' workspace."
+            )
+
+    except Exception as e:
+        spawner.log.error(f"Error mounting workspace storage! Error msg {str(e)}")
+
     return pod
 
 
