@@ -6,13 +6,18 @@ singleuser:
   defaultUrl: "/lab"
   startTimeout: 600
   memory:
-    limit: 4G
-    guarantee: 1G
+    limit: 1G
+    guarantee: 256M
   cpu:
-    limit: 1
+    limit: 0.5
     guarantee: 0.25
   storage:
-    capacity: 8Gi
+    # https://azure.microsoft.com/en-gb/pricing/details/storage/files/
+    capacity: 10Gi
+    dynamic:
+      storageClass: landerhub-azurefile
+      storageAccessModes:
+        - ReadWriteMany
     # extraVolumes:
     #   - name: jupyterhub-shared
     #     persistentVolumeClaim:
@@ -27,3 +32,5 @@ singleuser:
     # https_proxy: ""
     HTTP_PROXY: ""
     # HTTPS_PROXY: ""
+    # See https://github.com/jupyter/notebook/issues/5058
+    JUPYTER_RUNTIME_DIR: /tmp
