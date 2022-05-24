@@ -36,7 +36,6 @@ custom:
   workspaces:
     00_ws_default:
       display_name: Default Generic Workspace
-      slug: 00_ws_default
       description: Basic environment for testing with Python R and Julia.
       default: True
       start_date: 2022-01-01
@@ -45,7 +44,6 @@ custom:
 
     10_ws_advanced:
       display_name: Advanced Generic Workspace
-      slug: 10_ws_advanced
       description: Advanced environment for testing with Python R and Julia.
       start_date: 2022-01-01
       end_date: 2030-01-01
@@ -53,7 +51,6 @@ custom:
 
     neuro_headline_rstudio:
       display_name: Neurology Headline Data Project
-      slug: neuro_headline_rstudio
       description: Lancaster University student placement project
       start_date: 2022-05-01
       end_date: 2022-09-30
@@ -70,7 +67,6 @@ custom:
 
     neuro_direct2scan_rstudio:
       display_name: Neurology Direct to Scan Project
-      slug: neuro_direct2scan_rstudio
       description: Lancaster University student placement project
       start_date: 2022-05-01
       end_date: 2022-09-30
@@ -104,7 +100,6 @@ custom:
 
     colorectal_2ww_jupyter:
       display_name: Colorectal 2WW Analytics
-      slug: colorectal_2ww_jupyter
       description: Colorectal 2WW pathway analysis
       start_date: 2022-05-01
       end_date: 2022-12-31
@@ -121,7 +116,6 @@ custom:
 
     fft_jupyter:
       display_name: FFT Sentiment Analysis
-      slug: fft_jupyter
       description: FFT Sentiment Analysis NLP collaboration with Imperial College London
       start_date: 2022-05-01
       end_date: 2022-12-31
