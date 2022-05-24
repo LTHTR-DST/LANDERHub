@@ -4,7 +4,7 @@ custom:
   # =============================================================================
   environments:
     rstudio_default: &rstudio_default
-      image: crlander.azurecr.io/vvcb/rstudio-notebook:0.1.0
+      image: crlander.azurecr.io/vvcb/rstudio-notebook:0.2.0
       memory:
         guarantee: 512M
         limit: 2G
@@ -50,7 +50,7 @@ custom:
       kubespawner_override: *jupyter_advanced
 
     neuro_headline_rstudio:
-      display_name: Neurology Headline Data Project
+      display_name: Analysis of an outpatient neurology diagnostic coding dataset
       description: Lancaster University student placement project
       start_date: 2022-05-01
       end_date: 2022-09-30
@@ -66,7 +66,7 @@ custom:
             readOnly: False
 
     neuro_direct2scan_rstudio:
-      display_name: Neurology Direct to Scan Project
+      display_name: Analysis of Suspected Nervous System Cancer Referrals
       description: Lancaster University student placement project
       start_date: 2022-05-01
       end_date: 2022-09-30
@@ -82,8 +82,7 @@ custom:
             readOnly: False
 
     frailty_rstudio:
-      display_name: Acute Frailty Unit Project
-      slug: frailty_rstudio
+      display_name: Assessing effectiveness of care in an Acute Frailty Unity
       description: Lancaster University student placement project
       start_date: 2022-05-01
       end_date: 2022-09-30
