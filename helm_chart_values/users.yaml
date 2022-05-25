@@ -1,11 +1,20 @@
 custom:
   users: &users
-      end_date: 2025-12-31
-      workspaces:
-        - 00_ws_default
-        - 10_ws_advanced
-        - neuro_headline_rstudio
-        - neuro_direct2scan_rstudio
-        - frailty_rstudio
-        - colorectal_2ww_jupyter
-        - fft_jupyter      end_date: 2030-12-31
+    "vishnu.chandrabalan@lthtr.nhs.uk":
+      end_date: 2030-12-31
+      workspaces: 
+        # 00_ws_default:
+        #   end_date: 2030-12-31
+        10_ws_advanced:
+          end_date: 2030-12-31
+        neuro_headline_rstudio:
+          end_date: 2030-12-31
+        neuro_direct2scan_rstudio:
+          end_date: 2030-12-31
+        frailty_rstudio:
+          end_date: 2030-12-31
+        colorectal_2ww_jupyter:
+          end_date: 2030-12-31
+        fft_jupyter:
+          end_date: 2030-12-31
+          
