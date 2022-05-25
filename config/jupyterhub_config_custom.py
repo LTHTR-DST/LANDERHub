@@ -17,7 +17,11 @@ import z2jh
 def get_workspaces(spawner: KubeSpawner):
     user = spawner.user.name
 
-    user_workspaces = set(z2jh.get_config(f"custom.users.{user}.workspaces", []))
+    # accessing user workspaces using email id in dot notation does not work
+    # user_workspaces:dict = z2jh.get_config(f"custom.users.{user}.workspaces", dict())
+    user_workspaces: dict = (
+        z2jh.get_config("custom.users", {}).get(user, {}).get("workspaces", dict())
+    )
 
     permitted_workspaces = []
 

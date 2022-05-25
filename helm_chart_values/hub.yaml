@@ -12,11 +12,12 @@ hub:
         - name
         - profile
         - email
+      username_claim: upn
+      admin_users:
+        - vishnu.chandrabalan@lthtr.nhs.uk
     JupyterHub:
       authenticator_class: azuread
       admin_access: true
-      admin_users:
-        - chandrabalan vishnu (lthtr)
       template_paths:
         - "/usr/local/etc/jupyterhub/custom_templates"
       template_vars:
