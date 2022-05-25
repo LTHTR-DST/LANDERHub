@@ -3,11 +3,10 @@
 # https://discourse.jupyter.org/t/tailoring-spawn-options-and-server-configuration-to-certain-users/8449
 # https://discourse.jupyter.org/t/shared-folder-for-users-with-r-o-access-for-some-and-r-w-access-for-some-in-jupyterhub/4220/8
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from kubernetes import client
-from kubernetes.client.models import (V1ObjectMeta, V1Pod, V1Volume,
-                                      V1VolumeMount)
+from kubernetes.client.models import V1ObjectMeta, V1Pod, V1Volume, V1VolumeMount
 from kubespawner.spawner import KubeSpawner
 from kubespawner.utils import get_k8s_model
 
@@ -23,34 +22,62 @@ def get_workspaces(spawner: KubeSpawner):
         z2jh.get_config("custom.users", {}).get(user, {}).get("workspaces", dict())
     )
 
+    # Add the default workspace to all users.
+    # Otherwise, the code at the end of this function will raise an unhandled error
+    # Will have to reimplement/rethink whether a new user should get access to an analytical environment by default.
+    # Good practice would be for no one to have access unless explicitly set.
+
+    user_workspaces.update({"00_ws_default": {"end_date": "2022-12-31"}})
+
     permitted_workspaces = []
 
-    for user_ws in user_workspaces:
-
-        ws = z2jh.get_config(f"custom.workspaces.{user_ws}", None)
+    for ws_key, ws_values in user_workspaces.items():
+        ws = z2jh.get_config(f"custom.workspaces.{ws_key}", None)
         if ws is None:
-            print(f"Workspace {user_ws} not found for user {user}")
+            spawner.log.error(f"Workspace {ws_key} not found for user {user}.")
             continue
 
+        # Check if workspace itself has expired
         ws_end_date = ws.get("end_date", "1900-01-01")
         ws_end_date = datetime.strptime(ws_end_date, "%Y-%m-%d")
+        ws_days_left: timedelta = ws_end_date - datetime.today()
+        ws_days_left = ws_days_left.days
 
-        ws["slug"] = user_ws
-
-        if datetime.today() > ws_end_date:
-            # expired environment
+        if ws_days_left < 0:
             spawner.log.info(
-                f'Workspace {user_ws} expired on {ws_end_date.strftime( "%Y-%m-%d")}. Consider removing it from config.'
+                f"Workspace {ws_key} expired on {ws_end_date.strftime( '%Y-%m-%d')}. Consider removing it from config."
             )
             continue
 
-        ws["kubespawner_override"]["extra_labels"] = {"workspace": user_ws}
+        # Check if user access to workspace has expired
+        user_ws_end_date = ws_values.get("end_date", "1900-01-01")
+        user_ws_end_date = datetime.strptime(user_ws_end_date, "%Y-%m-%d")
+        user_ws_days_left: timedelta = user_ws_end_date - datetime.today()
+        user_ws_days_left = user_ws_days_left.days
+
+        if user_ws_days_left < 0:
+            spawner.log.info(
+                f"User {user}'s access to workspace {ws_key}({ws.get('display_name','' )}) has expired."
+            )
+
+        ws["kubespawner_override"]["extra_labels"] = {"workspace": ws_key}
+        ws["slug"] = ws_key
+
+        ws["ws_days_left"] = ws_days_left
+        ws["user_ws_days_left"] = user_ws_days_left
 
         permitted_workspaces.append(ws)
 
     permitted_workspaces = sorted(
         permitted_workspaces, key=lambda x: x.get("slug", "99_Z")
     )
+
+    # Raise an unhandled exception if no user workspaces found.
+    # This is avoided by adding default workspace to all users.
+    # This currently raises a 500 status code. Find a better way of doing this.
+    # https://github.com/jupyterhub/jupyterhub/issues/2291
+    if len(permitted_workspaces) == 0:
+        raise Exception(f"User {user} does not have any workspaces assigned!")
 
     return permitted_workspaces
 
@@ -141,7 +168,7 @@ c.KubeSpawner.profile_form_template = """
                 {% if profile.kubespawner_override.image %}
                     <br><em>Image: {{ profile.kubespawner_override.image.split('/')[-1] }}</em>
                 {% endif %}
-                <br><em>Expires: {{ profile.end_date }}</em>
+                <br><em>Your access expires in : {{profile.user_ws_days_left }} days.</em>
                 </p>
             </div>
         </label>
