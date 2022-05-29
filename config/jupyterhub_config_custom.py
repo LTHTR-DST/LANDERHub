@@ -15,19 +15,20 @@ import z2jh
 
 def get_workspaces(spawner: KubeSpawner):
     user = spawner.user.name
-
-    # accessing user workspaces using email id in dot notation does not work
-    # user_workspaces:dict = z2jh.get_config(f"custom.users.{user}.workspaces", dict())
-    user_workspaces: dict = (
-        z2jh.get_config("custom.users", {}).get(user, {}).get("workspaces", dict())
-    )
+    # ToDo: Find a better way of dealing with new users.
+    try:
+        # accessing user workspaces using email id in dot notation does not work
+        # user_workspaces:dict = z2jh.get_config(f"custom.users.{user}.workspaces", dict())
+        user_workspaces: dict = (
+            z2jh.get_config("custom.users").get(user).get("workspaces")
+        )
+    except:
+        user_workspaces = {"00_ws_default": {"end_date": "2022-12-31"}}
 
     # Add the default workspace to all users.
     # Otherwise, the code at the end of this function will raise an unhandled error
     # Will have to reimplement/rethink whether a new user should get access to an analytical environment by default.
     # Good practice would be for no one to have access unless explicitly set.
-
-    user_workspaces.update({"00_ws_default": {"end_date": "2022-12-31"}})
 
     permitted_workspaces = []
 
@@ -84,34 +85,6 @@ def get_workspaces(spawner: KubeSpawner):
 
 def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
 
-    common_storage = {
-        "volume": {
-            "name": "landerhub-common",
-            "persistentVolumeClaim": {"claimName": "pvc-landerhub-common"},
-        },
-        "volume_mount": {
-            "name": "landerhub-common",
-            "mountPath": "/home/jovyan/shared_readonly",
-            "readOnly": True,
-        },
-    }
-
-    try:
-        # get both volume and volume_mount before adding to exsiting lists.
-        # Error here will skip assigning just the volume and not the mount
-        volume = common_storage["volume"]
-        volume_mount = common_storage["volume_mount"]
-
-        pod.spec.volumes.append(get_k8s_model(V1Volume, volume))
-        pod.spec.containers[0].volume_mounts.append(
-            get_k8s_model(V1VolumeMount, volume_mount)
-        )
-
-        spawner.log.info(f"Successfully mounted {v['name']} to {vm['mountPath']}.")
-
-    except Exception as e:
-        spawner.log.error(f"Error mounting common shared folders. Error msg: {str(e)}")
-
     # Add additional storage based on workspace label on pod
     # This ensures that the correct storage is mounted into the correct workspace
     try:
@@ -125,6 +98,22 @@ def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
         spawner.log.info(f"Attempting to mount {str(storage)}...")
 
         if storage:
+            # Remove other user storage if workspace has dedicated storage specified
+            # This prevents user from moving data between workspaces using their personal
+            # storage that appears in all workpaces.
+            # Unless the user is an admin user, in which case leave their storage in place
+
+            admin_users = z2jh.get_config(
+                "hub.config.AzureAdOAuthenticator.admin_users", []
+            )
+
+            if spawner.user.name not in admin_users:
+                spawner.log.info(
+                    f"Workspace {workspace} has dedicated storage. Removing all user storage from container."
+                )
+                pod.spec.volumes = []
+                pod.spec.containers[0].volume_mounts = []
+
             volumes = storage["volumes"]
             volume_mounts = storage["volume_mounts"]
             for v, vm in zip(volumes, volume_mounts):
@@ -141,6 +130,37 @@ def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
 
     except Exception as e:
         spawner.log.error(f"Error mounting workspace storage! Error msg {str(e)}")
+
+    # Mount read-only shared folder at the end.
+    try:
+        common_storage = {
+            "volume": {
+                "name": "landerhub-common",
+                "persistentVolumeClaim": {"claimName": "pvc-landerhub-common"},
+            },
+            "volume_mount": {
+                "name": "landerhub-common",
+                "mountPath": "/home/jovyan/shared_readonly",
+                "readOnly": True,
+            },
+        }
+
+        # get both volume and volume_mount before adding to exsiting lists.
+        # Error here will skip assigning just the volume and not the mount
+        volume = common_storage["volume"]
+        volume_mount = common_storage["volume_mount"]
+
+        pod.spec.volumes.append(get_k8s_model(V1Volume, volume))
+        pod.spec.containers[0].volume_mounts.append(
+            get_k8s_model(V1VolumeMount, volume_mount)
+        )
+
+        spawner.log.info(
+            f"Successfully mounted {volume['name']} to {volume_mount['mountPath']}."
+        )
+
+    except Exception as e:
+        spawner.log.error(f"Error mounting common shared folders. Error msg: {str(e)}")
 
     return pod
 
