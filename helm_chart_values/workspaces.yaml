@@ -126,6 +126,7 @@ custom:
         cpu:
           guarantee: 0.3
           limit: 1
+      storage:
         volumes:
           - name: fft-shared
             persistentVolumeClaim:
