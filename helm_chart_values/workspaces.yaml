@@ -135,3 +135,19 @@ custom:
           - name: fft-shared
             mountPath: /home/jovyan/shared_fft
             readOnly: False
+
+    vc-sd:
+      display_name: VC-SD Workspace
+      description: Shared workspace for VC and SD
+      start_date: 2022-05-01
+      end_date: 2025-12-31
+      kubespawner_override: *jupyter_advanced
+      storage:
+        volumes:
+          - name: landerhub-vc-sd
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-vc-sd
+        volume_mounts:
+          - name: landerhub-vc-sd
+            mountPath: /home/jovyan/landerhub-vc-sd
+            readOnly: False
