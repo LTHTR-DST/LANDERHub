@@ -14,6 +14,7 @@
 # kubectl delete clusterrolebinding landerhub-prd 
 # kubectl delete clusterrole landerhub-prd 
 
+cp -r /mnt/c/Users/vishnu.chandrabalan/.kube/config ~/.kube/config
 # need a mechanism to change this between prd and dev
 NS=landerhub-prd 
 HELM_RELEASE_NAME=jhpvt01
