@@ -9,8 +9,8 @@ custom:
         guarantee: 512M
         limit: 2G
       cpu:
-        guarantee: 0.3
-        limit: 1
+        guarantee: 0
+        limit: 0.5
       default_url: /rstudio/auth-sign-in?appUri=%2F
 
     jupyter_default: &jupyter_default
@@ -19,16 +19,16 @@ custom:
         guarantee: 512M
         limit: 2G
       cpu:
-        guarantee: 0.2
-        limit: 1
+        guarantee: 0
+        limit: 0.5
     jupyter_advanced: &jupyter_advanced
       image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
       memory:
         guarantee: 2G
         limit: 6G
       cpu:
-        guarantee: 0.5
-        limit: 1.5
+        guarantee: 0
+        limit: 1
 
   # =============================================================================
   # Workspace Definitions
@@ -124,8 +124,8 @@ custom:
           guarantee: 512M
           limit: 2G
         cpu:
-          guarantee: 0.3
-          limit: 1
+          guarantee: 0
+          limit: 0.5
       storage:
         volumes:
           - name: fft-shared
