@@ -9,7 +9,7 @@ custom:
           end_date: 2030-12-31
         neuro_headline_rstudio:
           end_date: 2030-12-31
-        neuro_direct2scan_rstudio:
+        neuro_direct2scan_jupyter:
           end_date: 2030-12-31
         frailty_rstudio:
           end_date: 2030-12-31
@@ -38,7 +38,7 @@ custom:
       workspaces:
         neuro_headline_rstudio:
           end_date: 2022-09-30
-        neuro_direct2scan_rstudio:
+        neuro_direct2scan_jupyter:
           end_date: 2022-09-30
         frailty_rstudio:
           end_date: 2022-09-30
@@ -71,7 +71,7 @@ custom:
     "hitesh.kasamsetty@lthtr.nhs.uk":
       end_date: 2022-09-30
       workspaces:
-        neuro_direct2scan_rstudio:
+        neuro_direct2scan_jupyter:
           end_date: 2022-09-30
     "jai.boucher@lthtr.nhs.uk":
       end_date: 2022-09-30
@@ -83,3 +83,8 @@ custom:
       workspaces:
         colorectal_2ww_jupyter:
           end_date: 2022-09-30
+    "mustafa.khanbhai@lthtr.nhs.uk":
+      end_date: 2023-11-10
+      workspaces:
+        fft_jupyter:
+          end_date: 2023-11-14
