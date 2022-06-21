@@ -26,6 +26,8 @@ custom:
           end_date: 2025-12-31
         10_ws_advanced:
           end_date: 2025-12-31
+        fft_jupyter:
+          end_date: 2023-11-14
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
