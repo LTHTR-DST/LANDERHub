@@ -5,30 +5,24 @@ custom:
   environments:
     rstudio_default: &rstudio_default
       image: crlander.azurecr.io/vvcb/rstudio-notebook:0.2.0
-      memory:
-        guarantee: 512M
-        limit: 2G
-      cpu:
-        guarantee: 0
-        limit: 0.5
+      mem_guarantee: 512M
+      mem_limit: 2G
+      cpu_guarantee: 0
+      cpu_limit: 0.5
       default_url: /rstudio/auth-sign-in?appUri=%2F
 
     jupyter_default: &jupyter_default
       image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
-      memory:
-        guarantee: 512M
-        limit: 2G
-      cpu:
-        guarantee: 0
-        limit: 0.5
+      mem_guarantee: 512M
+      mem_limit: 2G
+      cpu_guarantee: 0
+      cpu_limit: 0.5
     jupyter_advanced: &jupyter_advanced
       image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
-      memory:
-        guarantee: 2G
-        limit: 6G
-      cpu:
-        guarantee: 0
-        limit: 1
+      mem_guarantee: 2G
+      mem_limit: 6G
+      cpu_guarantee: 0
+      cpu_limit: 1
 
   # =============================================================================
   # Workspace Definitions
@@ -120,12 +114,10 @@ custom:
       end_date: 2023-11-14
       kubespawner_override:
         image: crlander.azurecr.io/vvcb/fft-notebook:0.1.0
-        memory:
-          guarantee: 512M
-          limit: 2G
-        cpu:
-          guarantee: 0
-          limit: 0.5
+        mem_guarantee: 512M
+        mem_limit: 2G
+        cpu_guarantee: 0
+        cpu_limit: 0.5
       storage:
         volumes:
           - name: fft-shared
