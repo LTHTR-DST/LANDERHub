@@ -43,3 +43,6 @@ hub:
     # https_proxy: ""
     HTTP_PROXY: ""
     # HTTPS_PROXY: ""
+  livenessProbe:
+    initialDelaySeconds: 5
+    
