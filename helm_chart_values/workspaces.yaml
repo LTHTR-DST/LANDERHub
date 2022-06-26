@@ -7,7 +7,7 @@ custom:
       image: crlander.azurecr.io/vvcb/rstudio-notebook:0.2.0
       mem_guarantee: 512M
       mem_limit: 2G
-      cpu_guarantee: 0
+      cpu_guarantee: 0.1
       cpu_limit: 0.5
       default_url: /rstudio/auth-sign-in?appUri=%2F
 
@@ -15,13 +15,13 @@ custom:
       image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
       mem_guarantee: 512M
       mem_limit: 2G
-      cpu_guarantee: 0
+      cpu_guarantee: 0.1
       cpu_limit: 0.5
     jupyter_advanced: &jupyter_advanced
       image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
       mem_guarantee: 2G
       mem_limit: 6G
-      cpu_guarantee: 0
+      cpu_guarantee: 0.2
       cpu_limit: 1
 
   # =============================================================================
@@ -116,7 +116,7 @@ custom:
         image: crlander.azurecr.io/vvcb/fft-notebook:0.1.0
         mem_guarantee: 512M
         mem_limit: 2G
-        cpu_guarantee: 0
+        cpu_guarantee: 0.1
         cpu_limit: 0.5
       storage:
         volumes:
