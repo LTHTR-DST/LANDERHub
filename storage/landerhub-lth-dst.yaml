@@ -1,0 +1,33 @@
+# kubectl apply --namespace=jupyterhub -f azure_file_pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-landerhub-lth-dst
+  namespace: landerhub-prd
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile
+  azureFile:
+    secretName: stlthlandercore-secret
+    secretNamespace: default
+    shareName: landerhub-lth-dst
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-landerhub-lth-dst
+  namespace: landerhub-prd
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  volumeName: pvc-landerhub-lth-dst
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 5Gi

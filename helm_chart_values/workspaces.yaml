@@ -143,3 +143,19 @@ custom:
           - name: landerhub-vc-sd
             mountPath: /home/jovyan/landerhub-vc-sd
             readOnly: False
+
+    lth-dst:
+      display_name: LTH Data Science Team Workspace
+      description: Shared workspace for LTH DST (VC, SD, QA, TH)
+      start_date: 2022-06-22
+      end_date: 2025-12-31
+      kubespawner_override: *jupyter_advanced
+      storage:
+        volumes:
+          - name: landerhub-lth-dst
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-lth-dst
+        volume_mounts:
+          - name: landerhub-lth-dst
+            mountPath: /home/jovyan/landerhub-lth-dst
+            readOnly: False

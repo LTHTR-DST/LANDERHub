@@ -19,6 +19,8 @@ custom:
           end_date: 2030-12-31
         vc-sd:
           end_date: 2025-12-31
+        lth-dst:
+          end_date: 2025-12-31
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -28,12 +30,16 @@ custom:
           end_date: 2025-12-31
         fft_jupyter:
           end_date: 2023-11-14
+        lth-dst:
+          end_date: 2025-12-31
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
         00_ws_default:
           end_date: 2025-12-31
         10_ws_advanced:
+          end_date: 2025-12-31
+        lth-dst:
           end_date: 2025-12-31
     "jo.knight@lthtr.nhs.uk":
       end_date: 2025-12-31
@@ -52,6 +58,8 @@ custom:
         10_ws_advanced:
           end_date: 2025-12-31
         vc-sd:
+          end_date: 2025-12-31
+        lth-dst:
           end_date: 2025-12-31
     "mubarak.patel@lthtr.nhs.uk":
       end_date: 2025-12-31
