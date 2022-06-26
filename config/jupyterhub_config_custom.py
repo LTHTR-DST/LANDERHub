@@ -60,6 +60,7 @@ def get_workspaces(spawner: KubeSpawner):
             spawner.log.info(
                 f"User {user}'s access to workspace {ws_key}({ws.get('display_name','' )}) has expired."
             )
+            continue
 
         ws["kubespawner_override"]["extra_labels"] = {"workspace": ws_key}
         ws["slug"] = ws_key
