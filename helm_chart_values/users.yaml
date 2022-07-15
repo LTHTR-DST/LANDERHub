@@ -78,11 +78,6 @@ custom:
       workspaces:
         neuro_headline_rstudio:
           end_date: 2022-09-30
-    "hitesh.kasamsetty@lthtr.nhs.uk":
-      end_date: 2022-09-30
-      workspaces:
-        neuro_direct2scan_jupyter:
-          end_date: 2022-09-30
     "jai.boucher@lthtr.nhs.uk":
       end_date: 2022-09-30
       workspaces:
