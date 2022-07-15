@@ -21,6 +21,8 @@ custom:
           end_date: 2025-12-31
         lth-dst:
           end_date: 2025-12-31
+        gpu_workspace:
+          end_date: 2025-12-31
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
