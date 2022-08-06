@@ -70,11 +70,6 @@ custom:
           end_date: 2025-12-31
         10_ws_advanced:
           end_date: 2025-12-31
-    "rohini.subramaniam@lthtr.nhs.uk":
-      end_date: 2023-11-14
-      workspaces:
-        fft_jupyter:
-          end_date: 2023-11-14
     "nick.ainsworth@lthtr.nhs.uk":
       end_date: 2022-09-30
       workspaces:
