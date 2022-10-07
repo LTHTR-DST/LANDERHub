@@ -70,21 +70,6 @@ custom:
           end_date: 2025-12-31
         10_ws_advanced:
           end_date: 2025-12-31
-    "nick.ainsworth@lthtr.nhs.uk":
-      end_date: 2022-09-30
-      workspaces:
-        neuro_headline_rstudio:
-          end_date: 2022-09-30
-    "jai.boucher@lthtr.nhs.uk":
-      end_date: 2022-09-30
-      workspaces:
-        frailty_rstudio:
-          end_date: 2022-09-30
-    "srimathi.shanmugavadivelu@lthtr.nhs.uk":
-      end_date: 2022-09-30
-      workspaces:
-        colorectal_2ww_jupyter:
-          end_date: 2022-09-30
     "mustafa.khanbhai@lthtr.nhs.uk":
       end_date: 2023-11-10
       workspaces:
