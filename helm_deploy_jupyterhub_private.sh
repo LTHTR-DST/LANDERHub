@@ -13,13 +13,13 @@
 # find your role name and then delete
 # kubectl delete clusterrolebinding landerhub-prd 
 # kubectl delete clusterrole landerhub-prd 
-
+#====================================================================
 cp -r /mnt/c/Users/vishnu.chandrabalan/.kube/config ~/.kube/config
 
 CURRENTAKSCONTEXT=$(kubectl config current-context)
 AKSNAME=aks-lander-core-prd-01
 kubectl config use-context $AKSNAME
-
+#====================================================================
 # need a mechanism to change this between prd and dev
 NS=landerhub-prd 
 HELM_RELEASE_NAME=jhpvt01
@@ -42,5 +42,6 @@ helm upgrade \
     --set-file hub.extraFiles.customPageTemplate.stringData=./templates/custom_page.html \
     --set-file hub.extraFiles.customSpawnPageTemplate.stringData=./templates/custom_spawn.html \
     --set-file hub.extraFiles.customLogo.binaryData=./templates/lander_logo.png.b64
-
+#====================================================================
 kubectl config use-context $CURRENTAKSCONTEXT
+#====================================================================
