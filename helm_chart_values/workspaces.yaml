@@ -146,7 +146,7 @@ custom:
 
     lth-dst:
       display_name: LTH Data Science Team Workspace
-      description: Shared workspace for LTH DST (VC, SD, QA, TH)
+      description: Shared workspace for LTH DST
       start_date: 2022-06-22
       end_date: 2025-12-31
       kubespawner_override: *jupyter_advanced
