@@ -82,3 +82,8 @@ custom:
           end_date: 2025-12-31
         10_ws_advanced:
           end_date: 2025-12-31
+    "jai.boucher@lthtr.nhs.uk":
+      end_date: 2022-11-15
+      workspaces:
+        frailty_rstudio:
+          end_date: 2022-11-15
