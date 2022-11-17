@@ -23,6 +23,8 @@ custom:
           end_date: 2025-12-31
         gpu_workspace:
           end_date: 2025-12-31
+        neuro_informatics_jupyter:
+          end_date: 2023-11-30
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -34,6 +36,8 @@ custom:
           end_date: 2023-11-14
         lth-dst:
           end_date: 2025-12-31
+        neuro_informatics_jupyter:
+          end_date: 2023-11-30
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -52,6 +56,8 @@ custom:
           end_date: 2022-09-30
         frailty_rstudio:
           end_date: 2022-09-30
+        neuro_informatics_jupyter:
+          end_date: 2023-11-30
     "stephen.dobson@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -62,6 +68,8 @@ custom:
         vc-sd:
           end_date: 2025-12-31
         lth-dst:
+          end_date: 2025-12-31
+        10_ws_rstudo:
           end_date: 2025-12-31
     "mubarak.patel@lthtr.nhs.uk":
       end_date: 2025-12-31
@@ -87,3 +95,8 @@ custom:
       workspaces:
         frailty_rstudio:
           end_date: 2022-11-15
+    "seyedparsa.hemmatihosseini@lthtr.nhs.uk":
+      end_date: 2023-11-30
+      workspaces:
+        neuro_informatics_jupyter:
+          end_date: 2023-11-30

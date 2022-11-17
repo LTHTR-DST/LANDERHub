@@ -6,9 +6,9 @@ custom:
     rstudio_default: &rstudio_default
       image: crlander.azurecr.io/vvcb/rstudio-notebook:0.2.0
       mem_guarantee: 512M
-      mem_limit: 2G
+      mem_limit: 4G
       cpu_guarantee: 0.1
-      cpu_limit: 0.5
+      cpu_limit: 1
       default_url: /rstudio/auth-sign-in?appUri=%2F
 
     jupyter_default: &jupyter_default
@@ -42,7 +42,12 @@ custom:
       start_date: 2022-01-01
       end_date: 2030-01-01
       kubespawner_override: *jupyter_advanced
-
+    10_ws_rstudo:
+      display_name: RStudio Default Workspace
+      description: Default RStudio environment.
+      start_date: 2022-01-01
+      end_date: 2030-01-01
+      kubespawner_override: *rstudio_default
     neuro_headline_rstudio:
       display_name: Analysis of an outpatient neurology diagnostic coding dataset
       description: Lancaster University student placement project
@@ -74,7 +79,21 @@ custom:
           - name: landerhub-neuro-direct2scan
             mountPath: /home/jovyan/landerhub-neuro-direct2scan
             readOnly: False
-
+    neuro_informatics_jupyter:
+      display_name: Neurology Informatics Workspace
+      description: Common workspace for all neurology informatics workloads including NLP
+      start_date: 2022-11-17
+      end_date: 2023-11-30
+      kubespawner_override: *jupyter_advanced
+      storage:
+        volumes:
+          - name: landerhub-neuro_informatics
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-neuro_informatics
+        volume_mounts:
+          - name: landerhub-neuro_informatics
+            mountPath: /home/jovyan/landerhub-neuro_informatics
+            readOnly: False
     frailty_rstudio:
       display_name: Assessing effectiveness of care in an Acute Frailty Unity
       description: Lancaster University student placement project

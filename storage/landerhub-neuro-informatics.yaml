@@ -1,0 +1,33 @@
+# kubectl apply --namespace=jupyterhub -f azure_file_pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-landerhub-neuro-informatics
+  namespace: landerhub-prd
+spec:
+  capacity:
+    storage: 25Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: azurefile
+  azureFile:
+    secretName: stlthlandercore-secret
+    secretNamespace: default
+    shareName: landerhub-neuro-informatics
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-landerhub-neuro-informatics
+  namespace: landerhub-prd
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  volumeName: pvc-landerhub-neuro-informatics
+  storageClassName: azurefile
+  resources:
+    requests:
+      storage: 25Gi
