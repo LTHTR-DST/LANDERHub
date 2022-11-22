@@ -7,12 +7,6 @@ custom:
         #   end_date: 2030-12-31
         10_ws_advanced:
           end_date: 2030-12-31
-        neuro_headline_rstudio:
-          end_date: 2030-12-31
-        neuro_direct2scan_jupyter:
-          end_date: 2030-12-31
-        frailty_rstudio:
-          end_date: 2030-12-31
         colorectal_2ww_jupyter:
           end_date: 2030-12-31
         fft_jupyter:
@@ -25,6 +19,8 @@ custom:
           end_date: 2025-12-31
         neuro_informatics_jupyter:
           end_date: 2023-11-30
+        beamtree_adi_rstudio:
+          end_date: 2023-05-23
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -50,12 +46,6 @@ custom:
     "jo.knight@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
-        neuro_headline_rstudio:
-          end_date: 2022-09-30
-        neuro_direct2scan_jupyter:
-          end_date: 2022-09-30
-        frailty_rstudio:
-          end_date: 2022-09-30
         neuro_informatics_jupyter:
           end_date: 2023-11-30
     "stephen.dobson@lthtr.nhs.uk":
@@ -71,6 +61,8 @@ custom:
           end_date: 2025-12-31
         10_ws_rstudo:
           end_date: 2025-12-31
+        beamtree_adi_rstudio:
+          end_date: 2023-05-23
     "mubarak.patel@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -90,13 +82,18 @@ custom:
           end_date: 2025-12-31
         10_ws_advanced:
           end_date: 2025-12-31
-    "jai.boucher@lthtr.nhs.uk":
-      end_date: 2022-11-15
-      workspaces:
-        frailty_rstudio:
-          end_date: 2022-11-15
     "seyedparsa.hemmatihosseini@lthtr.nhs.uk":
       end_date: 2023-11-30
       workspaces:
         neuro_informatics_jupyter:
           end_date: 2023-11-30
+    "levi.bassin@lthtr.nhs.uk":
+      end_date: 2023-05-23
+      workspaces:
+        beamtree_adi_rstudio:
+          end_date: 2023-05-23
+    "david.bell@lthtr.nhs.uk":
+      end_date: 2023-05-23
+      workspaces:
+        beamtree_adi_rstudio:
+          end_date: 2023-05-23

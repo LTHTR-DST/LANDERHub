@@ -42,43 +42,14 @@ custom:
       start_date: 2022-01-01
       end_date: 2030-01-01
       kubespawner_override: *jupyter_advanced
+    
     10_ws_rstudo:
       display_name: RStudio Default Workspace
       description: Default RStudio environment.
       start_date: 2022-01-01
       end_date: 2030-01-01
       kubespawner_override: *rstudio_default
-    neuro_headline_rstudio:
-      display_name: Analysis of an outpatient neurology diagnostic coding dataset
-      description: Lancaster University student placement project
-      start_date: 2022-05-01
-      end_date: 2022-09-30
-      kubespawner_override: *rstudio_default
-      storage:
-        volumes:
-          - name: landerhub-neuro-headlinecategory
-            persistentVolumeClaim:
-              claimName: pvc-landerhub-neuro-headlinecategory
-        volume_mounts:
-          - name: landerhub-neuro-headlinecategory
-            mountPath: /home/jovyan/landerhub-neuro-headlinecategory
-            readOnly: False
-
-    neuro_direct2scan_jupyter:
-      display_name: Analysis of Suspected Nervous System Cancer Referrals
-      description: Lancaster University student placement project
-      start_date: 2022-05-01
-      end_date: 2022-09-30
-      kubespawner_override: *jupyter_default
-      storage:
-        volumes:
-          - name: landerhub-neuro-direct2scan
-            persistentVolumeClaim:
-              claimName: pvc-landerhub-neuro-direct2scan
-        volume_mounts:
-          - name: landerhub-neuro-direct2scan
-            mountPath: /home/jovyan/landerhub-neuro-direct2scan
-            readOnly: False
+    
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
       description: Common workspace for all neurology informatics workloads including NLP
@@ -93,21 +64,6 @@ custom:
         volume_mounts:
           - name: landerhub-neuro_informatics
             mountPath: /home/jovyan/landerhub-neuro_informatics
-            readOnly: False
-    frailty_rstudio:
-      display_name: Assessing effectiveness of care in an Acute Frailty Unity
-      description: Lancaster University student placement project
-      start_date: 2022-05-01
-      end_date: 2022-11-15
-      kubespawner_override: *rstudio_default
-      storage:
-        volumes:
-          - name: landerhub-fraility
-            persistentVolumeClaim:
-              claimName: pvc-landerhub-fraility
-        volume_mounts:
-          - name: landerhub-fraility
-            mountPath: /home/jovyan/landerhub-fraility
             readOnly: False
 
     colorectal_2ww_jupyter:
@@ -217,4 +173,28 @@ custom:
             readOnly: False
           - name: landerhub-lth-dst
             mountPath: /home/jovyan/landerhub-lth-dst
+            readOnly: False
+    
+    beamtree_adi_rstudio:
+      display_name: Beamtree Ainsoff Deterioration Index Analysis
+      description: | 
+        RStudio environment for Service Evaluation of ADI for identifying deteriorating patients by Beamtree Australia. 
+        All work must be stored in /home/jovyan/beamtree_adi. 
+        Any work saved outside of this folder or its children will be lost between sessions.
+      start_date: 2022-11-22
+      end_date: 2023-05-23
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/beamtree-rstudio:0.1.0
+        mem_guarantee: 1G
+        mem_limit: 8G
+        cpu_guarantee: 0.1
+        cpu_limit: 1
+      storage:
+        volumes:
+          - name: beamtree-adi
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-beamtree-adi
+        volume_mounts:
+          - name: beamtree-adi
+            mountPath: /home/jovyan/beamtree_adi
             readOnly: False
