@@ -24,6 +24,13 @@ custom:
       cpu_guarantee: 0.2
       cpu_limit: 1
 
+    code_server: &code_server
+      image: crlander.azurecr.io/vvcb/datascience-code-server:latest
+      mem_guarantee: 2G
+      mem_limit: 16G
+      cpu_guarantee: 0.2
+      cpu_limit: 1
+
   # =============================================================================
   # Workspace Definitions
   # =============================================================================
@@ -50,20 +57,32 @@ custom:
       end_date: 2030-01-01
       kubespawner_override: *rstudio_default
     
+    11_ws_codeserver:
+      display_name: VSCode and Desktop Server Workspace
+      description: JupyterLab with additional options of Code Server and XCFE Desktop
+      start_date: 2022-12-08
+      end_date: 2030-01-01
+      kubespawner_override: *code_server
+
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
       description: Common workspace for all neurology informatics workloads including NLP
       start_date: 2022-11-17
       end_date: 2023-11-30
-      kubespawner_override: *jupyter_advanced
+      kubespawner_override: 
+        image: crlander.azurecr.io/vvcb/datascience-nlp:0.1.0
+        mem_guarantee: 8G
+        mem_limit: 24G
+        cpu_guarantee: 0.1
+        cpu_limit: 1
       storage:
         volumes:
-          - name: landerhub-neuro_informatics
+          - name: landerhub-neuro-informatics
             persistentVolumeClaim:
-              claimName: pvc-landerhub-neuro_informatics
+              claimName: pvc-landerhub-neuro-informatics  
         volume_mounts:
-          - name: landerhub-neuro_informatics
-            mountPath: /home/jovyan/landerhub-neuro_informatics
+          - name: landerhub-neuro-informatics
+            mountPath: /home/jovyan/landerhub_neuro_informatics
             readOnly: False
 
     colorectal_2ww_jupyter:
