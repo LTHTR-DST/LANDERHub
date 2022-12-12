@@ -70,7 +70,7 @@ custom:
       start_date: 2022-11-17
       end_date: 2023-11-30
       kubespawner_override: 
-        image: crlander.azurecr.io/vvcb/datascience-nlp:0.1.0
+        image: crlander.azurecr.io/vvcb/datascience-nlp:minimal
         mem_guarantee: 8G
         mem_limit: 24G
         cpu_guarantee: 0.1

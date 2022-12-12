@@ -4,7 +4,7 @@ singleuser:
     tag: 0.1.0
     pullPolicy: Always
   defaultUrl: "/lab"
-  startTimeout: 600
+  startTimeout: 900
   memory:
     limit: 1G
     guarantee: 256M

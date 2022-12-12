@@ -65,6 +65,8 @@ custom:
           end_date: 2025-12-31
         beamtree_adi_rstudio:
           end_date: 2023-05-23
+        11_ws_codeserver:
+          end_date: 2030-12-31
     "mubarak.patel@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
