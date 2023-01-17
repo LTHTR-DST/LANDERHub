@@ -23,7 +23,7 @@ def get_workspaces(spawner: KubeSpawner):
             z2jh.get_config("custom.users").get(user).get("workspaces")
         )
     except:
-        user_workspaces = {"00_ws_default": {"end_date": "2022-12-31"}}
+        user_workspaces = {"00_ws_default": {"end_date": "2023-12-31"}}
 
     # Add the default workspace to all users.
     # Otherwise, the code at the end of this function will raise an unhandled error

@@ -18,7 +18,7 @@ custom:
       cpu_guarantee: 0.1
       cpu_limit: 0.5
     jupyter_advanced: &jupyter_advanced
-      image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
+      image: crlander.azurecr.io/vvcb/datascience-notebook:2023-01-10
       mem_guarantee: 2G
       mem_limit: 6G
       cpu_guarantee: 0.2
@@ -63,6 +63,18 @@ custom:
       start_date: 2022-12-08
       end_date: 2030-01-01
       kubespawner_override: *code_server
+
+    12_ws_codeserver:
+      display_name: VSCode Build Server
+      description: JupyterLab with additional options of Code Server and XCFE Desktop
+      start_date: 2022-12-08
+      end_date: 2030-01-01
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/datascience-code-server:latest
+        mem_guarantee: 4G
+        mem_limit: 16G
+        cpu_guarantee: 1
+        cpu_limit: 4
 
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
@@ -203,8 +215,8 @@ custom:
       start_date: 2022-11-22
       end_date: 2023-05-23
       kubespawner_override:
-        image: crlander.azurecr.io/vvcb/beamtree-rstudio:0.1.0
-        mem_guarantee: 1G
+        image: crlander.azurecr.io/vvcb/beamtree-rstudio:0.2.0
+        mem_guarantee: 4G
         mem_limit: 8G
         cpu_guarantee: 0.1
         cpu_limit: 1

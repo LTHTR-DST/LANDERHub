@@ -23,6 +23,8 @@ custom:
           end_date: 2023-05-23
         11_ws_codeserver:
           end_date: 2030-12-31
+        12_ws_codeserver:
+          end_date: 2030-12-31
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -78,7 +80,7 @@ custom:
       end_date: 2023-11-10
       workspaces:
         fft_jupyter:
-          end_date: 2023-11-14
+          end_date: 2023-11-10
     "andrew.robinson@lthtr.nhs.uk":
       end_date: 2023-12-31
       workspaces:
