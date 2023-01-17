@@ -10,7 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: azurefile
+  storageClassName: landerhub-azurefile
   azureFile:
     secretName: stlthlandercore-secret
     secretNamespace: default
@@ -27,7 +27,7 @@ spec:
     - ReadWriteMany
   volumeMode: Filesystem
   volumeName: pvc-landerhub-lth-dst
-  storageClassName: azurefile
+  storageClassName: landerhub-azurefile
   resources:
     requests:
       storage: 5Gi

@@ -21,5 +21,6 @@ mountOptions:
   - mfsymlinks
   - cache=strict
   - actimeo=30
+  - metadata
 allowVolumeExpansion: true
 reclaimPolicy: Retain
