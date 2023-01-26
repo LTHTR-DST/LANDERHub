@@ -64,17 +64,20 @@ custom:
       end_date: 2030-01-01
       kubespawner_override: *code_server
 
-    12_ws_codeserver:
-      display_name: VSCode Build Server
-      description: JupyterLab with additional options of Code Server and XCFE Desktop
-      start_date: 2022-12-08
-      end_date: 2030-01-01
+    nhsx_nlp:
+      display_name: NHSX NLP Workspace
+      description: JupyterLab, Code-Server, XFCE with MedCAT and related tools.
+      start_date: 2023-01-25
+      end_date: 2024-01-05
       kubespawner_override:
-        image: crlander.azurecr.io/vvcb/datascience-code-server:latest
+        image: crlander.azurecr.io/vvcb/scipy-code-server:2023-01-26
         mem_guarantee: 4G
-        mem_limit: 16G
-        cpu_guarantee: 1
+        mem_limit: 32G
+        cpu_guarantee: 2
         cpu_limit: 4
+        node_selector:
+          nodepool: omoppool
+
 
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
