@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pvc-landerhub-lth-dst
+  name: pvc-landerhub-nhsx-nlp
   namespace: landerhub-prd
 spec:
   capacity:
@@ -14,7 +14,7 @@ spec:
   azureFile:
     secretName: stlthlandercore-secret
     secretNamespace: default
-    shareName: landerhub-lth-dst
+    shareName: landerhub-nhsx-nlp
     readOnly: false
   mountOptions:
     - uid=1000
@@ -24,13 +24,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-landerhub-lth-dst
+  name: pvc-landerhub-nhsx-nlp
   namespace: landerhub-prd
 spec:
   accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
-  volumeName: pvc-landerhub-lth-dst
+  volumeName: pvc-landerhub-nhsx-nlp
   storageClassName: landerhub-azurefile
   resources:
     requests:

@@ -113,3 +113,18 @@ custom:
       workspaces:
         beamtree_adi_rstudio:
           end_date: 2023-05-23
+    "aizaan.anwar@lthtr.nhs.uk":
+      end_date: 2023-06-02
+      workspaces:
+        nhsx_nlp:
+          end_date: 2023-06-02
+    "paul.carroll@lthtr.nhs.uk":
+      end_date: 2023-06-02
+      workspaces:
+        nhsx_nlp:
+          end_date: 2023-06-02
+    "jonathan.pearson@lthtr.nhs.uk":
+      end_date: 2023-06-02
+      workspaces:
+        nhsx_nlp:
+          end_date: 2023-06-02

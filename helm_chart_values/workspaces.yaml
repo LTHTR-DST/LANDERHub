@@ -73,12 +73,19 @@ custom:
         image: crlander.azurecr.io/vvcb/scipy-code-server:2023-01-26
         mem_guarantee: 4G
         mem_limit: 32G
-        cpu_guarantee: 2
+        cpu_guarantee: 1
         cpu_limit: 4
         node_selector:
           nodepool: omoppool
-
-
+      storage:
+        volumes:
+          - name: landerhub-nhsx-nlp
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-nhsx-nlp
+        volume_mounts:
+          - name: landerhub-nhsx-nlp
+            mountPath: /home/jovyan/nhsx_nlp
+            readOnly: False
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
       description: Common workspace for all neurology informatics workloads including NLP
@@ -220,9 +227,9 @@ custom:
       kubespawner_override:
         image: crlander.azurecr.io/vvcb/beamtree-rstudio:0.2.0
         mem_guarantee: 4G
-        mem_limit: 8G
+        mem_limit: 16G
         cpu_guarantee: 0.1
-        cpu_limit: 1
+        cpu_limit: 4
       storage:
         volumes:
           - name: beamtree-adi
