@@ -27,8 +27,8 @@ hub:
           Contact Vishnu.Chandrabalan@lthtr.nhs.uk with feedback/comments.
   extraFiles:
     # https://zero-to-jupyterhub.readthedocs.io/en/latest/resources/reference.html#hub-extrafiles
-    customConfig:
-      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
+    # customConfig:
+    #   mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
     customPageTemplate:
       mountPath: /usr/local/etc/jupyterhub/custom_templates/page.html
     customSpawnPageTemplate:
@@ -41,9 +41,9 @@ hub:
     # keep injected https_proxy - this fixes github oauth redirect
     # this also fixes api access 503 failures
     http_proxy: ""
-    # https_proxy: ""
+    https_proxy: ""
     HTTP_PROXY: ""
-    # HTTPS_PROXY: ""
+    HTTPS_PROXY: ""
   livenessProbe:
     initialDelaySeconds: 5
   services:
