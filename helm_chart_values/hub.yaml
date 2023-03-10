@@ -39,10 +39,15 @@ hub:
   baseUrl: /landerhub
   extraEnv:
     # keep injected https_proxy - this fixes github oauth redirect
+    # this also fixes api access 503 failures
     http_proxy: ""
     # https_proxy: ""
     HTTP_PROXY: ""
     # HTTPS_PROXY: ""
   livenessProbe:
     initialDelaySeconds: 5
+  services:
+    dask-gateway:
+      display: false
+      apiToken: a6b165caf1b9c7adda3756c34066b29b9b1394ff339360168bab59d8b4479626
     

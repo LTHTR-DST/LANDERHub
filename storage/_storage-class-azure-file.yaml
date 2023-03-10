@@ -10,9 +10,11 @@ parameters:
   skuName: Standard_LRS
   location: uksouth
   storageAccount: stlthlandercore
+  server: stlthlandercore.privatelink.file.core.windows.net
   secretNamespace: default
   secretName: stlthlandercore-secret
   resourceGroup: rg-lander-core-prd
+  shareNamePrefix: landerhub-auto-
 mountOptions:
   - dir_mode=0777
   - file_mode=0777
@@ -20,7 +22,7 @@ mountOptions:
   - gid=100
   - mfsymlinks
   - cache=strict
+  - nosharesock
   - actimeo=30
-  - metadata
 allowVolumeExpansion: true
 reclaimPolicy: Retain

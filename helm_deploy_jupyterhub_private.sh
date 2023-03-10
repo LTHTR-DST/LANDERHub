@@ -17,7 +17,7 @@
 cp -r /mnt/c/Users/vishnu.chandrabalan/.kube/config ~/.kube/config
 
 CURRENTAKSCONTEXT=$(kubectl config current-context)
-AKSNAME=aks-lander-core-prd-01
+AKSNAME=aks-lander-core-prd-02
 kubectl config use-context $AKSNAME
 #====================================================================
 # need a mechanism to change this between prd and dev

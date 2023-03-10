@@ -6,7 +6,7 @@ metadata:
   namespace: landerhub-prd
 spec:
   capacity:
-    storage: 5Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -34,4 +34,4 @@ spec:
   storageClassName: landerhub-azurefile
   resources:
     requests:
-      storage: 5Gi
+      storage: 50Gi
