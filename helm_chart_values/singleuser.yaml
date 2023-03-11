@@ -13,12 +13,13 @@ singleuser:
     guarantee: 0.25
   storage:
     # https://azure.microsoft.com/en-gb/pricing/details/storage/files/
-    capacity: 10Gi
-    homeMountPath: /home/jovyan/personal
-    dynamic:
-      storageClass: landerhub-azurefile
-      storageAccessModes:
-        - ReadWriteMany
+    # capacity: 10Gi
+    # homeMountPath: /home/jovyan/personal
+    # dynamic:
+    #   storageClass: landerhub-azurefile
+    #   storageAccessModes:
+    #     - ReadWriteMany
+    type: none
   extraEnv:
     # keep injected https_proxy - this fixes github oauth redirect
     http_proxy: ""
