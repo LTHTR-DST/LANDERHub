@@ -38,6 +38,7 @@ helm upgrade \
     --values ./helm_chart_values/singleuser.yaml \
     --values ./helm_chart_values/users.yaml \
     --values ./helm_chart_values/workspaces.yaml \
+    --set-file hub.extraFiles.customConfig.stringData=./config/jupyterhub_config_custom.py \
     --set-file hub.extraFiles.customPageTemplate.stringData=./templates/custom_page.html \
     --set-file hub.extraFiles.customSpawnPageTemplate.stringData=./templates/custom_spawn.html \
     --set-file hub.extraFiles.customLogo.binaryData=./templates/lander_logo.png.b64

@@ -5,8 +5,8 @@
 
 from datetime import datetime, timedelta
 
-from kubernetes import client
-from kubernetes.client.models import V1ObjectMeta, V1Pod, V1Volume, V1VolumeMount
+from kubernetes_asyncio import client
+from kubernetes_asyncio.client.models import V1ObjectMeta, V1Pod, V1Volume, V1VolumeMount
 from kubespawner.spawner import KubeSpawner
 from kubespawner.utils import get_k8s_model
 
