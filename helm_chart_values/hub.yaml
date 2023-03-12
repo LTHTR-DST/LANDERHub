@@ -52,8 +52,8 @@ hub:
     http_proxy: ""
     HTTP_PROXY: ""
 
-    https_proxy: ""
-    HTTPS_PROXY: ""
+  #   https_proxy: ""
+  #   HTTPS_PROXY: ""
     
     # no_proxy: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
     # NO_PROXY: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
