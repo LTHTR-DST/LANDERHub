@@ -27,14 +27,22 @@ hub:
           Contact Vishnu.Chandrabalan@lthtr.nhs.uk with feedback/comments.
   extraFiles:
     # https://zero-to-jupyterhub.readthedocs.io/en/latest/resources/reference.html#hub-extrafiles
-    customConfig:
-      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
+    # customConfig:
+    #   mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/jupyterhub_config_custom.py
     customPageTemplate:
       mountPath: /usr/local/etc/jupyterhub/custom_templates/page.html
     customSpawnPageTemplate:
       mountPath: /usr/local/etc/jupyterhub/custom_templates/spawn.html
     customLogo:
       mountPath: /usr/local/share/jupyterhub/static/lander-logo.png
+    # customK8sRestClient:
+    #   mountPath: /usr/local/lib/python3.9/site-packages/kubernetes_asyncio/client/rest.py
+    # customAioConnector: 
+    #   mountPath: /usr/local/lib/python3.9/site-packages/aiohttp/connector.py
+    # customTornadoHttpClient:
+    #   mountPath: /usr/local/lib/python3.9/site-packages/tornado/httpclient.py
+    customOauthenticator:
+      mountPath: /usr/local/lib/python3.9/site-packages/oauthenticator/oauth2.py
   # https://discourse.jupyter.org/t/trouble-configuring-ingress-for-helm-chart/5050/3
   baseUrl: /landerhub
   extraEnv:
@@ -44,19 +52,19 @@ hub:
     http_proxy: ""
     HTTP_PROXY: ""
 
-    # https_proxy: ""
-    # HTTPS_PROXY: ""
+    https_proxy: ""
+    HTTPS_PROXY: ""
     
     # no_proxy: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
     # NO_PROXY: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
   shutdownOnLogout: true
-  networkPolicy:
-    enabled: false
+  # networkPolicy:
+  #   enabled: false
   livenessProbe:
     initialDelaySeconds: 5
-  services:
-    dask-gateway:
-      display: false
-      apiToken: a6b165caf1b9c7adda3756c34066b29b9b1394ff339360168bab59d8b4479626
+  # services:
+  #   dask-gateway:
+  #     display: false
+  #     apiToken: a6b165caf1b9c7adda3756c34066b29b9b1394ff339360168bab59d8b4479626
 debug: 
   enabled: true    
