@@ -43,11 +43,7 @@ helm upgrade \
     --set-file hub.extraFiles.customLogo.binaryData=./templates/lander_logo.png.b64 \
     --set-file hub.extraFiles.customOauthenticator.stringData=./hacks/oauthenticator_oauth2.py \
     --set-file hub.extraFiles.customConfig.stringData=./config/jupyterhub_config_custom.py \
-    # --set-file hub.extraFiles.customTornadoHttpClient.stringData=./hacks/tornado_httpclient.py \
 
-    
-    # --set-file hub.extraFiles.customAioConnector.stringData=./hacks/aiohttp_connector.py
-    # --set-file hub.extraFiles.customK8sRestClient.stringData=./hacks/kubernetes_asyncio___client__rest.py \
 #====================================================================
 kubectl config use-context $CURRENTAKSCONTEXT
 #====================================================================

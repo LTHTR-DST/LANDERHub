@@ -12,7 +12,7 @@ custom:
       default_url: /rstudio/auth-sign-in?appUri=%2F
 
     jupyter_default: &jupyter_default
-      image: crlander.azurecr.io/vvcb/datascience-notebook:0.1.0
+      image: crlander.azurecr.io/vvcb/datascience-notebook:2023-01-10
       mem_guarantee: 512M
       mem_limit: 2G
       cpu_guarantee: 0.1
@@ -76,7 +76,7 @@ custom:
         cpu_guarantee: 1
         cpu_limit: 4
         node_selector:
-          nodepool: omoppool
+          agentpool: hubpool126
       storage:
         volumes:
           - name: landerhub-nhsx-nlp
@@ -99,7 +99,7 @@ custom:
         cpu_guarantee: 1
         cpu_limit: 4
         node_selector:
-          nodepool: omoppool
+          agentpool: hubpool126
       storage:
         volumes:
           - name: landerhub-nhsx-nlp
@@ -116,9 +116,9 @@ custom:
       start_date: 2022-11-17
       end_date: 2023-11-30
       kubespawner_override: 
-        image: crlander.azurecr.io/vvcb/datascience-nlp:minimal
-        mem_guarantee: 8G
-        mem_limit: 24G
+        image: crlander.azurecr.io/vvcb/scipy-code-server:py-38-2023-02-23
+        mem_guarantee: 4G
+        mem_limit: 32G
         cpu_guarantee: 0.1
         cpu_limit: 1
       storage:
