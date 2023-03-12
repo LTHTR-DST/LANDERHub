@@ -4,11 +4,9 @@ proxy:
   https:
     enabled: true
     type: offload
-    # hosts:
     #   - ai.xlthtr.nhs.uk
     # type: secret
     # secret:
-    #   name: secret-tls-xlthtr
   service:
     type: ClusterIP
     # loadBalancerIP: 172.18.16.190
