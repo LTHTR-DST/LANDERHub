@@ -3,8 +3,6 @@ custom:
     "vishnu.chandrabalan@lthtr.nhs.uk":
       end_date: 2030-12-31
       workspaces: 
-        # 00_ws_default:
-        #   end_date: 2030-12-31
         10_ws_advanced:
           end_date: 2030-12-31
         colorectal_2ww_jupyter:
@@ -27,14 +25,23 @@ custom:
           end_date: 2030-12-31
         nhsx_nlp_py38:
           end_date: 2024-01-05
-
+    ########################################
+    # LTH Data Science Team
+    ########################################
+    "stephen.dobson@lthtr.nhs.uk":
+      end_date: 2025-12-31
+      workspaces:
+        vc-sd:
+          end_date: 2025-12-31
+        lth-dst:
+          end_date: 2025-12-31
+        10_ws_rstudo:
+          end_date: 2025-12-31
+        beamtree_adi_rstudio:
+          end_date: 2023-05-23  
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
-        00_ws_default:
-          end_date: 2025-12-31
-        10_ws_advanced:
-          end_date: 2025-12-31
         fft_jupyter:
           end_date: 2023-11-14
         lth-dst:
@@ -46,10 +53,6 @@ custom:
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
-        00_ws_default:
-          end_date: 2025-12-31
-        10_ws_advanced:
-          end_date: 2025-12-31
         lth-dst:
           end_date: 2025-12-31
         nhsx_nlp:
@@ -63,44 +66,22 @@ custom:
           end_date: 2023-11-30
         nhsx_nlp:
           end_date: 2030-12-31
-    "stephen.dobson@lthtr.nhs.uk":
-      end_date: 2025-12-31
-      workspaces:
-        00_ws_default:
-          end_date: 2025-12-31
-        10_ws_advanced:
-          end_date: 2025-12-31
-        vc-sd:
-          end_date: 2025-12-31
-        lth-dst:
-          end_date: 2025-12-31
-        10_ws_rstudo:
-          end_date: 2025-12-31
-        beamtree_adi_rstudio:
-          end_date: 2023-05-23
-        11_ws_codeserver:
-          end_date: 2030-12-31
-        nhsx_nlp:
-          end_date: 2030-12-31
-    "mubarak.patel@lthtr.nhs.uk":
-      end_date: 2025-12-31
-      workspaces:
-        00_ws_default:
-          end_date: 2025-12-31
-        10_ws_advanced:
-          end_date: 2025-12-31
-    "mustafa.khanbhai@lthtr.nhs.uk":
-      end_date: 2023-11-10
-      workspaces:
-        fft_jupyter:
-          end_date: 2023-11-10
     "andrew.robinson@lthtr.nhs.uk":
       end_date: 2023-12-31
       workspaces:
         lth-dst:
           end_date: 2025-12-31
-        10_ws_advanced:
-          end_date: 2025-12-31
+    ########################################
+    # FFT Sentiment Analysis
+    ########################################    
+    "mustafa.khanbhai@lthtr.nhs.uk":
+      end_date: 2023-11-10
+      workspaces:
+        fft_jupyter:
+          end_date: 2023-11-10
+    ########################################
+    # Neurology Informatics
+    ########################################
     "seyedparsa.hemmatihosseini@lthtr.nhs.uk":
       end_date: 2023-11-30
       workspaces:
@@ -108,6 +89,9 @@ custom:
           end_date: 2023-11-30
         nhsx_nlp:
           end_date: 2030-12-31
+    ########################################
+    # Beamtree
+    ########################################
     "levi.bassin@lthtr.nhs.uk":
       end_date: 2023-05-23
       workspaces:
@@ -118,6 +102,9 @@ custom:
       workspaces:
         beamtree_adi_rstudio:
           end_date: 2023-05-23
+    ########################################
+    # NHSX PhD Internship
+    ########################################
     "aizaan.anwar@lthtr.nhs.uk":
       end_date: 2023-06-02
       workspaces:
@@ -139,3 +126,4 @@ custom:
           end_date: 2023-06-02
         nhsx_nlp_py38:
           end_date: 2023-06-02
+    
