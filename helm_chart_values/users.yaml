@@ -25,6 +25,9 @@ custom:
           end_date: 2030-12-31
         nhsx_nlp:
           end_date: 2030-12-31
+        nhsx_nlp_py38:
+          end_date: 2024-01-05
+
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -51,6 +54,8 @@ custom:
           end_date: 2025-12-31
         nhsx_nlp:
           end_date: 2030-12-31
+        nhsx_nlp_py38:
+          end_date: 2024-01-05
     "jo.knight@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -118,13 +123,19 @@ custom:
       workspaces:
         nhsx_nlp:
           end_date: 2023-06-02
+        nhsx_nlp_py38:
+          end_date: 2023-06-02
     "paul.carroll@lthtr.nhs.uk":
       end_date: 2023-06-02
       workspaces:
         nhsx_nlp:
           end_date: 2023-06-02
+        nhsx_nlp_py38:
+          end_date: 2023-06-02
     "jonathan.pearson@lthtr.nhs.uk":
       end_date: 2023-06-02
       workspaces:
         nhsx_nlp:
+          end_date: 2023-06-02
+        nhsx_nlp_py38:
           end_date: 2023-06-02
