@@ -22,8 +22,8 @@ hub:
         - "/usr/local/etc/jupyterhub/custom_templates"
       template_vars:
         announcement: |
-          Preview only. 
-          Subject to rapid, breaking changes. 
+          Preview only.
+          Subject to rapid, breaking changes.
           Contact Vishnu.Chandrabalan@lthtr.nhs.uk with feedback/comments.
   extraFiles:
     # https://zero-to-jupyterhub.readthedocs.io/en/latest/resources/reference.html#hub-extrafiles
@@ -37,7 +37,7 @@ hub:
       mountPath: /usr/local/share/jupyterhub/static/lander-logo.png
     # customK8sRestClient:
     #   mountPath: /usr/local/lib/python3.9/site-packages/kubernetes_asyncio/client/rest.py
-    # customAioConnector: 
+    # customAioConnector:
     #   mountPath: /usr/local/lib/python3.9/site-packages/aiohttp/connector.py
     # customTornadoHttpClient:
     #   mountPath: /usr/local/lib/python3.9/site-packages/tornado/httpclient.py
@@ -52,9 +52,9 @@ hub:
     http_proxy: ""
     HTTP_PROXY: ""
 
-  #   https_proxy: ""
-  #   HTTPS_PROXY: ""
-    
+    # https_proxy: ""
+    # HTTPS_PROXY: ""
+
     # no_proxy: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
     # NO_PROXY: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.1,168.63.129.16,169.254.169.254,ai.xlthtr.nhs.uk,aks-lander-rg-lander-core-p-a5a137-oi2fo0t5.privatelink.uksouth.azmk8s.io,konnectivity,localhost"
   shutdownOnLogout: true
@@ -66,5 +66,5 @@ hub:
   #   dask-gateway:
   #     display: false
   #     apiToken: a6b165caf1b9c7adda3756c34066b29b9b1394ff339360168bab59d8b4479626
-debug: 
-  enabled: true    
+debug:
+  enabled: true
