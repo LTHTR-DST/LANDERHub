@@ -49,14 +49,14 @@ custom:
       start_date: 2022-01-01
       end_date: 2030-01-01
       kubespawner_override: *jupyter_advanced
-    
+
     10_ws_rstudo:
       display_name: RStudio Default Workspace
       description: Default RStudio environment.
       start_date: 2022-01-01
       end_date: 2030-01-01
       kubespawner_override: *rstudio_default
-    
+
     11_ws_codeserver:
       display_name: VSCode and Desktop Server Workspace
       description: JupyterLab with additional options of Code Server and XCFE Desktop
@@ -86,7 +86,7 @@ custom:
           - name: landerhub-nhsx-nlp
             mountPath: /home/jovyan/nhsx_nlp
             readOnly: False
-    
+
     nhsx_nlp_py38:
       display_name: NHSX NLP Workspace (Python 3.8)
       description: JupyterLab, Code-Server, XFCE with MedCAT and related tools.
@@ -109,13 +109,13 @@ custom:
           - name: landerhub-nhsx-nlp
             mountPath: /home/jovyan/nhsx_nlp
             readOnly: False
-    
+
     neuro_informatics_jupyter:
       display_name: Neurology Informatics Workspace
       description: Common workspace for all neurology informatics workloads including NLP
       start_date: 2022-11-17
       end_date: 2023-11-30
-      kubespawner_override: 
+      kubespawner_override:
         image: crlander.azurecr.io/vvcb/scipy-code-server:py-38-2023-02-23
         mem_guarantee: 4G
         mem_limit: 32G
@@ -125,7 +125,7 @@ custom:
         volumes:
           - name: landerhub-neuro-informatics
             persistentVolumeClaim:
-              claimName: pvc-landerhub-neuro-informatics  
+              claimName: pvc-landerhub-neuro-informatics
         volume_mounts:
           - name: landerhub-neuro-informatics
             mountPath: /home/jovyan/landerhub_neuro_informatics
@@ -135,7 +135,7 @@ custom:
       display_name: Colorectal 2WW Analytics
       description: Colorectal 2WW pathway analysis
       start_date: 2022-05-01
-      end_date: 2022-12-31
+      end_date: 2023-12-31
       kubespawner_override: *jupyter_advanced
       storage:
         volumes:
@@ -239,12 +239,12 @@ custom:
           - name: landerhub-lth-dst
             mountPath: /home/jovyan/landerhub-lth-dst
             readOnly: False
-    
+
     beamtree_adi_rstudio:
       display_name: Beamtree Ainsoff Deterioration Index Analysis
-      description: | 
-        RStudio environment for Service Evaluation of ADI for identifying deteriorating patients by Beamtree Australia. 
-        All work must be stored in /home/jovyan/beamtree_adi. 
+      description: |
+        RStudio environment for Service Evaluation of ADI for identifying deteriorating patients by Beamtree Australia.
+        All work must be stored in /home/jovyan/beamtree_adi.
         Any work saved outside of this folder or its children will be lost between sessions.
       start_date: 2022-11-22
       end_date: 2023-05-23
@@ -263,3 +263,36 @@ custom:
           - name: beamtree-adi
             mountPath: /home/jovyan/beamtree_adi
             readOnly: False
+    guac_manics:
+      display_name: Sandbox with Guacamole VDI Wrapper
+      description: |
+        Single user server wrapped in Apache Guacamole
+        https://github.com/manics/jupyter-guacamole/
+      start_date: 2023-04-16
+      end_date: 2025-12-31
+      kubespawner_override:
+        image: ghcr.io/manics/jupyter-guacamole:main
+        storage:
+          # Uncomment to disable persistent storage
+          # type: none
+          homeMountPath: /home/ubuntu
+        # Use default entrypoint
+        # cmd:
+        cloudMetadata:
+          blockWithIptables: false
+        extra_env:
+          GUACD_HOST: localhost
+          GUACD_PORT: "4822"
+          PROTOCOL: vnc
+          HOSTNAME: localhost
+          # Optionally disable copy out and paste in
+          # DISABLE_COPY: "true"
+          # DISABLE_PASTE: "true"
+        extra_containers:
+          - name: ubuntu-mate
+            image: ghcr.io/manics/ubuntu-mate-vnc:main
+          - name: guacd
+            image: docker.io/guacamole/guacd:1.5.0
+        startTimeout: 300
+        # Use the default UID from the image
+        # uid:
