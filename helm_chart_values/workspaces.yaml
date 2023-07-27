@@ -68,7 +68,7 @@ custom:
       display_name: NHSX NLP Workspace
       description: JupyterLab, Code-Server, XFCE with MedCAT and related tools.
       start_date: 2023-01-25
-      end_date: 2024-01-05
+      end_date: 2026-07-15
       kubespawner_override:
         image: crlander.azurecr.io/vvcb/scipy-code-server:2023-01-26
         mem_guarantee: 4G
@@ -91,7 +91,7 @@ custom:
       display_name: NHSX NLP Workspace (Python 3.8)
       description: JupyterLab, Code-Server, XFCE with MedCAT and related tools.
       start_date: 2023-02-23
-      end_date: 2024-01-05
+      end_date: 2026-07-15
       kubespawner_override:
         image: crlander.azurecr.io/vvcb/scipy-code-server:py-38-2023-02-23
         mem_guarantee: 4G
@@ -263,6 +263,31 @@ custom:
           - name: beamtree-adi
             mountPath: /home/jovyan/beamtree_adi
             readOnly: False
+
+    beamtree_cca_rstudio:
+      display_name: Beamtree Coding Complexity Analysis
+      description: |
+        RStudio environment for Service Evaluation of Coding Complexity Analysis by Beamtree Australia.
+        All work must be stored in /home/jovyan/beamtree_cca.
+        Any work saved outside of this folder or its children will be lost between sessions.
+      start_date: 2023-07-06
+      end_date: 2024-01-03
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/beamtree-rstudio:0.2.0
+        mem_guarantee: 4G
+        mem_limit: 16G
+        cpu_guarantee: 0.1
+        cpu_limit: 2
+      storage:
+        volumes:
+          - name: beamtree-cca
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-beamtree-cca
+        volume_mounts:
+          - name: beamtree-cca
+            mountPath: /home/jovyan/beamtree_cca
+            readOnly: False
+
     guac_manics:
       display_name: Sandbox with Guacamole VDI Wrapper
       description: |

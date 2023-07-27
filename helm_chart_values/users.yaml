@@ -25,6 +25,8 @@ custom:
           end_date: 2030-12-31
         nhsx_nlp_py38:
           end_date: 2024-01-05
+        beamtree_cca_rstudio:
+          end_date: 2025-01-03
         # guac_manics:
         #   end_date: 2025-12-31
     ########################################
@@ -41,6 +43,8 @@ custom:
           end_date: 2025-12-31
         beamtree_adi_rstudio:
           end_date: 2023-05-23
+        beamtree_cca_rstudio:
+          end_date: 2024-01-03
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -65,6 +69,8 @@ custom:
           end_date: 2024-01-05
         colorectal_2ww_jupyter:
           end_date: 2030-12-31
+        beamtree_cca_rstudio:
+          end_date: 2024-01-03
     "jo.knight@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -77,6 +83,11 @@ custom:
       workspaces:
         lth-dst:
           end_date: 2025-12-31
+    "magda.borkowska@lthtr.nhs.uk":
+      end_date: 2023-12-31
+      workspaces:
+        lth-dst:
+          end_date: 2023-12-31
     ########################################
     # FFT Sentiment Analysis
     ########################################
@@ -108,30 +119,36 @@ custom:
       workspaces:
         beamtree_adi_rstudio:
           end_date: 2023-05-23
+    "jack.aisbett@lthtr.nhs.uk":
+      end_date: 2024-01-03
+      workspaces:
+        beamtree_cca_rstudio:
+          end_date: 2024-01-03
+
     ########################################
     # NHSX PhD Internship
     ########################################
     "aizaan.anwar@lthtr.nhs.uk":
-      end_date: 2023-06-02
+      end_date: 2023-07-15
       workspaces:
         nhsx_nlp:
-          end_date: 2023-06-02
+          end_date: 2023-07-15
         nhsx_nlp_py38:
-          end_date: 2023-06-02
+          end_date: 2023-07-15
     "paul.carroll@lthtr.nhs.uk":
-      end_date: 2023-06-02
+      end_date: 2026-07-15
       workspaces:
         nhsx_nlp:
-          end_date: 2023-06-02
+          end_date: 2026-07-15
         nhsx_nlp_py38:
-          end_date: 2023-06-02
+          end_date: 2026-07-15
     "jonathan.pearson@lthtr.nhs.uk":
-      end_date: 2023-06-02
+      end_date: 2026-07-15
       workspaces:
         nhsx_nlp:
-          end_date: 2023-06-02
+          end_date: 2026-07-15
         nhsx_nlp_py38:
-          end_date: 2023-06-02
+          end_date: 2026-07-15
     ########################################
     # UoM Colorectal 2WW Project
     ########################################
@@ -151,3 +168,6 @@ custom:
         colorectal_2ww_jupyter:
           end_date: 2023-09-30
 
+    ########################################
+    # MMU Diabetic Foot Ulcer
+    ########################################
