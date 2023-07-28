@@ -288,6 +288,33 @@ custom:
             mountPath: /home/jovyan/beamtree_cca
             readOnly: False
 
+    mmu_dfu_cpu:
+      display_name: Diabetic Foot Ulcer Research
+      description: |
+        Python environment with JupyterLab, Code and XCFE.
+        Upto 8 vCPU and 32GB RAM. (No GPU)
+
+        All work must be stored in /home/jovyan/dfu.
+        Any work saved outside of this folder will be lost between sessions.
+      start_date: 2023-07-06
+      end_date: 2024-01-03
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/cpu-dfu:2023-07-26
+        defaultUrl: "/lab/tree/dfu"
+        mem_guarantee: 4G
+        mem_limit: 32G
+        cpu_guarantee: 0.1
+        cpu_limit: 8
+      storage:
+        volumes:
+          - name: dfu
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-dfu
+        volume_mounts:
+          - name: dfu
+            mountPath: /home/jovyan/dfu
+            readOnly: False
+
     guac_manics:
       display_name: Sandbox with Guacamole VDI Wrapper
       description: |

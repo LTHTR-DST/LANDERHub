@@ -27,6 +27,8 @@ custom:
           end_date: 2024-01-05
         beamtree_cca_rstudio:
           end_date: 2025-01-03
+        mmu_dfu_cpu:
+            end_date: 2026-07-31
         # guac_manics:
         #   end_date: 2025-12-31
     ########################################
@@ -171,3 +173,13 @@ custom:
     ########################################
     # MMU Diabetic Foot Ulcer
     ########################################
+      "moihoon.yap@lthtr.nhs.uk":
+        end_date: 2026-07-31
+        workspaces:
+          mmu_dfu_cpu:
+            end_date: 2026-07-31
+      "bill.cassidy@lthtr.nhs.uk":
+        end_date: 2026-07-31
+        workspaces:
+          mmu_dfu_cpu:
+            end_date: 2026-07-31
