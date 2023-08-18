@@ -173,13 +173,13 @@ custom:
     ########################################
     # MMU Diabetic Foot Ulcer
     ########################################
-      "moihoon.yap@lthtr.nhs.uk":
-        end_date: 2026-07-31
-        workspaces:
-          mmu_dfu_cpu:
-            end_date: 2026-07-31
-      "bill.cassidy@lthtr.nhs.uk":
-        end_date: 2026-07-31
-        workspaces:
-          mmu_dfu_cpu:
-            end_date: 2026-07-31
+    "moihoon.yap@lthtr.nhs.uk":
+      end_date: 2026-07-31
+      workspaces:
+        mmu_dfu_cpu:
+          end_date: 2026-07-31
+    "bill.cassidy@lthtr.nhs.uk":
+      end_date: 2026-07-31
+      workspaces:
+        mmu_dfu_cpu:
+          end_date: 2026-07-31
