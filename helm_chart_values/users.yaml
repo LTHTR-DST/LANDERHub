@@ -29,6 +29,8 @@ custom:
           end_date: 2025-01-03
         mmu_dfu_cpu:
             end_date: 2026-07-31
+        avoidable_admissions:
+          end_date: 2030-12-31
         # guac_manics:
         #   end_date: 2025-12-31
     ########################################
@@ -60,6 +62,8 @@ custom:
           end_date: 2030-12-31
         colorectal_2ww_jupyter:
           end_date: 2030-12-31
+        avoidable_admissions:
+          end_date: 2030-12-31
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -79,6 +83,8 @@ custom:
         neuro_informatics_jupyter:
           end_date: 2023-11-30
         nhsx_nlp:
+          end_date: 2030-12-31
+        avoidable_admissions:
           end_date: 2030-12-31
     "andrew.robinson@lthtr.nhs.uk":
       end_date: 2023-12-31
@@ -183,3 +189,12 @@ custom:
       workspaces:
         mmu_dfu_cpu:
           end_date: 2026-07-31
+
+    ########################################
+    # LU ED Avoidable Admissions
+    ########################################
+    "alex.garner@lthtr.nhs.uk":
+      end_date: 2026-07-01
+      workspaces:
+        avoidable_admissions:
+          end_date: 2026-07-01

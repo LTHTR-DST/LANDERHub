@@ -348,3 +348,19 @@ custom:
         startTimeout: 300
         # Use the default UID from the image
         # uid:
+
+    avoidable_admissions:
+      display_name: Avoidable Admissions
+      description: Collaboration with Lancaster University on Avoidable Admissions
+      start_date: 2023-09-01
+      end_date: 2026-07-01
+      kubespawner_override: *jupyter_advanced
+      storage:
+        volumes:
+          - name: landerhub-avoidable-admissions
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-avoidable-admissions
+        volume_mounts:
+          - name: landerhub-avoidable-admissions
+            mountPath: /home/jovyan/landerhub-avoidable-admissions
+            readOnly: False
