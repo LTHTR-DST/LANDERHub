@@ -137,12 +137,12 @@ custom:
     # NHSX PhD Internship
     ########################################
     "aizaan.anwar@lthtr.nhs.uk":
-      end_date: 2023-07-15
+      end_date: 2024-02-29
       workspaces:
         nhsx_nlp:
-          end_date: 2023-07-15
+          end_date: 2024-02-29
         nhsx_nlp_py38:
-          end_date: 2023-07-15
+          end_date: 2024-02-29
     "paul.carroll@lthtr.nhs.uk":
       end_date: 2026-07-15
       workspaces:
