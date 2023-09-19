@@ -116,11 +116,11 @@ custom:
       start_date: 2022-11-17
       end_date: 2023-11-30
       kubespawner_override:
-        image: crlander.azurecr.io/vvcb/scipy-code-server:py-38-2023-02-23
+        image: crlander.azurecr.io/vvcb/scipy-code-server:2023-01-26
         mem_guarantee: 4G
         mem_limit: 32G
         cpu_guarantee: 0.1
-        cpu_limit: 1
+        cpu_limit: 4
       storage:
         volumes:
           - name: landerhub-neuro-informatics
