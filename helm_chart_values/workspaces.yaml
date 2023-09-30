@@ -23,7 +23,12 @@ custom:
       mem_limit: 6G
       cpu_guarantee: 0.2
       cpu_limit: 1
-
+    cinnamon_code_py311: &cinnamon_code_py311
+      image: crlander.azurecr.io/v2/datascience-cinnamon-code:2023-09-25
+      mem_guarantee: 2G
+      mem_limit: 16G
+      cpu_guarantee: 0.2
+      cpu_limit: 4
     code_server: &code_server
       image: crlander.azurecr.io/vvcb/datascience-code-server:latest
       mem_guarantee: 2G
@@ -35,6 +40,22 @@ custom:
   # Workspace Definitions
   # =============================================================================
   workspaces:
+    00_ws_test:
+      display_name: Test Workspace
+      description: For testing purposes only
+      start_date: 2023-09-29
+      end_date: 2030-12-31
+      kubespawner_override: *cinnamon_code_py311
+      storage:
+        volumes:
+          - name: landerhub-lth-dst
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-lth-dst
+        volume_mounts:
+          - name: landerhub-lth-dst
+            mountPath: /home/jovyan/landerhub-lth-dst
+            readOnly: False
+
     00_ws_default:
       display_name: Default Generic Workspace
       description: Basic environment for testing with Python R and Julia.
@@ -62,7 +83,7 @@ custom:
       description: JupyterLab with additional options of Code Server and XCFE Desktop
       start_date: 2022-12-08
       end_date: 2030-01-01
-      kubespawner_override: *code_server
+      kubespawner_override: *cinnamon_code_py311
 
     nhsx_nlp:
       display_name: NHSX NLP Workspace
@@ -199,7 +220,26 @@ custom:
           - name: landerhub-lth-dst
             mountPath: /home/jovyan/landerhub-lth-dst
             readOnly: False
-
+    lth-dst-nlp:
+      display_name: LTH Data Science Team NLP/MedCAT Workspace
+      description: Shared workspace for LTH DST for Natural Language Processing
+      start_date: 2022-06-22
+      end_date: 2025-12-31
+      kubespawner_override:
+        image: crlander.azurecr.io/vvcb/scipy-code-server:py-38-2023-02-23
+        mem_guarantee: 4G
+        mem_limit: 32G
+        cpu_guarantee: 1
+        cpu_limit: 4
+      storage:
+        volumes:
+          - name: landerhub-lth-dst
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-lth-dst
+        volume_mounts:
+          - name: landerhub-lth-dst
+            mountPath: /home/jovyan/landerhub-lth-dst
+            readOnly: False
     gpu_workspace:
       display_name: GPU Workspace
       description: GPU-enabled workspace
