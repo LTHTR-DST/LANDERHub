@@ -16,6 +16,10 @@ spec:
     secretNamespace: default
     shareName: landerhub-avoidable-admissions
     readOnly: false
+  mountOptions:
+    - uid=1000
+    - gid=100
+    - nobrl
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
