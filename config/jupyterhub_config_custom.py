@@ -6,7 +6,12 @@
 from datetime import datetime, timedelta
 
 from kubernetes_asyncio import client
-from kubernetes_asyncio.client.models import V1ObjectMeta, V1Pod, V1Volume, V1VolumeMount
+from kubernetes_asyncio.client.models import (
+    V1ObjectMeta,
+    V1Pod,
+    V1Volume,
+    V1VolumeMount,
+)
 from kubespawner.spawner import KubeSpawner
 from kubespawner.utils import get_k8s_model
 
@@ -85,11 +90,9 @@ def get_workspaces(spawner: KubeSpawner):
 
 
 def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
-
     # Add additional storage based on workspace label on pod
     # This ensures that the correct storage is mounted into the correct workspace
     try:
-
         metadata: V1ObjectMeta = pod.metadata
 
         workspace = metadata.labels.get("workspace", "")
@@ -166,6 +169,7 @@ def modify_pod_hook(spawner: KubeSpawner, pod: V1Pod):
     return pod
 
 
+c.KubeSpawner.start_timeout = 900
 c.KubeSpawner.modify_pod_hook = modify_pod_hook
 c.KubeSpawner.profile_list = get_workspaces
 c.KubeSpawner.profile_form_template = """

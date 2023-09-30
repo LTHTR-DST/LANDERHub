@@ -21,7 +21,7 @@ from tornado.log import app_log
 from traitlets import Any, Bool, Dict, List, Unicode, default
 
 # VC - set proxy here and remove after authentication
-os.environ["https_proxy"] = "http://lthswproxy01.xlthtr.nhs.uk:800"
+# os.environ["https_proxy"] = "http://lthswproxy01.xlthtr.nhs.uk:800"
 
 
 AsyncHTTPClient.configure("tornado.curl_httpclient.CurlAsyncHTTPClient")
@@ -421,7 +421,7 @@ class OAuthenticator(Authenticator):
         try:
             print(req)
             # VC - set proxy here and remove after authentication
-            os.environ["https_proxy"] = "http://lthswproxy01.xlthtr.nhs.uk:800"
+            # os.environ["https_proxy"] = "http://lthswproxy01.xlthtr.nhs.uk:800"
             resp = await self.http_client.fetch(req, **kwargs)
         except HTTPClientError as e:
             if e.response:
@@ -453,8 +453,8 @@ class OAuthenticator(Authenticator):
                     return None
             else:
                 return resp
-        finally: 
-            os.environ["https_proxy"] = ""
+        # finally:
+        #     os.environ["https_proxy"] = ""
 
     def login_url(self, base_url):
         return url_path_join(base_url, "oauth_login")
@@ -734,7 +734,6 @@ class OAuthenticator(Authenticator):
         return True
 
     async def authenticate(self, handler, data=None, **kwargs):
-
         # build the parameters to be used in the request exchanging the oauth code for the access token
         access_token_params = self.build_access_tokens_request_params(handler, data)
         # exchange the oauth code for an access token and get the JSON with info about it
@@ -766,7 +765,7 @@ class OAuthenticator(Authenticator):
             return None
 
         # VC - reset https_prozt after authentication
-        os.environ["https_proxy"] = ""
+        # os.environ["https_proxy"] = ""
         # update the auth model with any info if available
         return await self.update_auth_model(auth_model, **kwargs)
 
