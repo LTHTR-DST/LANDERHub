@@ -11,8 +11,8 @@
 # kubectl get clusterroles
 # kubectl get clusterrolebindings
 # find your role name and then delete
-# kubectl delete clusterrolebinding landerhub-prd 
-# kubectl delete clusterrole landerhub-prd 
+# kubectl delete clusterrolebinding landerhub-prd
+# kubectl delete clusterrole landerhub-prd
 #====================================================================
 cp -r /mnt/c/Users/vishnu.chandrabalan/.kube/config ~/.kube/config
 
@@ -21,7 +21,7 @@ AKSNAME=aks-lander-core-prd-02
 kubectl config use-context $AKSNAME
 #====================================================================
 # need a mechanism to change this between prd and dev
-NS=landerhub-prd 
+NS=landerhub-prd
 HELM_RELEASE_NAME=jhpvt01
 Z2JH_VERSION=2.0.0
 
