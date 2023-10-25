@@ -23,7 +23,7 @@ custom:
       mem_limit: 6G
       cpu_guarantee: 0.2
       cpu_limit: 1
-    cinnamon_code_py311: &cinnamon_code_py311
+    xcfe_code_py311: &xcfe_code_py311
       image: crlander.azurecr.io/v2/datascience-cinnamon-code:2023-09-25
       mem_guarantee: 2G
       mem_limit: 16G
@@ -45,7 +45,7 @@ custom:
       description: For testing purposes only
       start_date: 2023-09-29
       end_date: 2030-12-31
-      kubespawner_override: *cinnamon_code_py311
+      kubespawner_override: *xcfe_code_py311
       storage:
         volumes:
           - name: landerhub-lth-dst
@@ -83,7 +83,7 @@ custom:
       description: JupyterLab with additional options of Code Server and XCFE Desktop
       start_date: 2022-12-08
       end_date: 2030-01-01
-      kubespawner_override: *cinnamon_code_py311
+      kubespawner_override: *xcfe_code_py311
 
     nhsx_nlp:
       display_name: NHSX NLP Workspace
@@ -150,6 +150,22 @@ custom:
         volume_mounts:
           - name: landerhub-neuro-informatics
             mountPath: /home/jovyan/landerhub_neuro_informatics
+            readOnly: False
+
+    neuro_informatics_fran:
+      display_name: Neurology Informatics (Fran)
+      description: Common workspace for all neurology informatics workloads
+      start_date: 2023-10-23
+      end_date: 2024-10-30
+      kubespawner_override: *xcfe_code_py311
+      storage:
+        volumes:
+          - name: landerhub-neuro-informatics-fran
+            persistentVolumeClaim:
+              claimName: pvc-landerhub-neuro-informatics-fran
+        volume_mounts:
+          - name: landerhub-neuro-informatics-fran
+            mountPath: /home/jovyan/workspace
             readOnly: False
 
     colorectal_2ww_jupyter:

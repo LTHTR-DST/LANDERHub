@@ -35,6 +35,8 @@ custom:
           end_date: 2030-12-31
         lth-dst-nlp:
           end_date: 2025-12-31
+        neuro_informatics_fran:
+          end_date: 2024-10-30
         # guac_manics:
         #   end_date: 2025-12-31
     ########################################
@@ -55,6 +57,8 @@ custom:
           end_date: 2024-01-03
         lth-dst-nlp:
           end_date: 2025-12-31
+        00_ws_test:
+          end_date: 2030-12-31
     "quinta.ashcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -74,6 +78,8 @@ custom:
           end_date: 2026-07-31
         lth-dst-nlp:
           end_date: 2025-12-31
+        neuro_informatics_fran:
+          end_date: 2024-10-30
     "timothy.howcroft@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -89,6 +95,8 @@ custom:
           end_date: 2024-01-03
         lth-dst-nlp:
           end_date: 2025-12-31
+        neuro_informatics_fran:
+          end_date: 2024-10-30
     "jo.knight@lthtr.nhs.uk":
       end_date: 2025-12-31
       workspaces:
@@ -98,6 +106,8 @@ custom:
           end_date: 2030-12-31
         avoidable_admissions:
           end_date: 2030-12-31
+        neuro_informatics_fran:
+          end_date: 2024-10-30
     "andrew.robinson@lthtr.nhs.uk":
       end_date: 2023-12-31
       workspaces:
@@ -126,6 +136,23 @@ custom:
           end_date: 2023-11-30
         nhsx_nlp:
           end_date: 2030-12-31
+    "hedley.emsley@lthtr.nhs.uk":
+      end_date: 2030-12-31
+      workspaces:
+        neuro_informatics_jupyter:
+          end_date: 2030-12-31
+        nhsx_nlp:
+          end_date: 2030-12-31
+    "frances.biggin2@lthtr.nhs.uk":
+      end_date: 2024-10-30
+      workspaces:
+        neuro_informatics_jupyter:
+          end_date: 2024-10-30
+        nhsx_nlp:
+          end_date: 2024-10-30
+        neuro_informatics_fran:
+          end_date: 2024-10-30
+
     ########################################
     # Beamtree
     ########################################
